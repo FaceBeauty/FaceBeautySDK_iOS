@@ -1,0 +1,96 @@
+{
+    "FBSkinBeauty": [
+        {
+            "title": "美白",
+            "title_en": "Whiteness",
+            "idCard":0,
+            "selected": true,
+            "subType": false,
+            "opened": false,
+            "icon": "whitening.png",
+            "selectedIcon":"whitening_selected.png",
+            "key":"FB_SKIN_WHITENING_SLIDER",
+            "defaultValue":70,
+            "sliderType":1
+        },
+        {
+            "title": "磨皮",
+            "title_en": "Exfoliating",
+            "idCard":1,
+            "selected": false,
+            "subType": false,
+            "opened": false,
+            "icon": "fineBlurriness.png",
+            "selectedIcon":"fineBlurriness_selected.png",
+            "key":"FB_SKIN_FINEBLURRINESS_SLIDER",
+            "defaultValue":60,
+            "sliderType":1
+        },
+        {
+            "title": "红润",
+            "title_en": "Ruddy",
+            "idCard":2,
+            "selected": false,
+            "subType": false,
+            "opened": false,
+            "icon": "rosiness.png",
+            "selectedIcon":"rosiness_selected.png",
+            "key":"FB_SKIN_ROSINESS_SLIDER",
+            "defaultValue":10,
+            "sliderType":1
+        },
+        {
+            "title": "清晰",
+            "title_en": "Distinctive",
+            "idCard":3,
+            "selected": false,
+            "subType": false,
+            "opened": false,
+            "icon": "clearness.png",
+            "selectedIcon":"clearness_selected.png",
+            "key":"FB_SKIN_CLEARNESS_SLIDER",
+            "defaultValue":5,
+            "sliderType":1
+        },
+        {
+            "title": "亮度",
+            "title_en": "Brightness",
+            "idCard":4,
+            "selected": false,
+            "subType": false,
+            "opened": false,
+            "icon": "brightness.png",
+            "selectedIcon":"brightness_selected.png",
+            "key":"FB_SKIN_BRIGHTNESS_SLIDER",
+            "defaultValue":5,
+            "sliderType":2
+        },
+        {
+            "title": "去黑眼圈",
+            "title_en": "Black eye",
+            "idCard":5,
+            "selected": false,
+            "subType": false,
+            "opened": false,
+            "icon": "darkCircleRemoving.png",
+            "selectedIcon":"darkCircleRemoving_selected.png",
+            "key":"FB_SKIN_DARKCIRCLEREMOVING_SLIDER",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "去法令纹",
+            "title_en": "Wrinkles",
+            "idCard":6,
+            "selected": false,
+            "subType": false,
+            "opened": false,
+            "icon": "nasolabial.png",
+            "selectedIcon":"nasolabial_selected.png",
+            "key":"FB_SKIN_NASOLABIAL_SLIDER",
+            "defaultValue":0,
+            "sliderType":1
+        }
+        
+    ]
+}

@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FBBeautyMenuView : UIView
 
 @property (nonatomic, assign) bool disabled;
-@property (nonatomic, copy) void (^onClickBlock)(NSArray *array);
+@property (nonatomic, copy) void (^onClickBlock)(NSArray *array , bool Hide);
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic, strong) UICollectionView *menuCollectionView;
 @property (nonatomic, strong) UILabel *makeupTitleLabel;// 美妆标题用
@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithFrame:(CGRect)frame listArr:(NSArray *)listArr;
 
 @property (nonatomic, assign) BOOL isThemeWhite;
+@property (nonatomic,assign) bool effectHide;
+
 
 @end
 

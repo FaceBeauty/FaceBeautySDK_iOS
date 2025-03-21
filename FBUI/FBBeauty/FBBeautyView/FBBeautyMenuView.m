@@ -92,7 +92,11 @@ static NSString *const FBBeautyMenuViewCellId = @"FBBeautyMenuViewCellId";
     NSDictionary *dic = self.listArr[indexPath.row];
     FBBeautyMenuViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:FBBeautyMenuViewCellId forIndexPath:indexPath];
     if (self.selectedIndexPath.row == indexPath.row) {
-        [cell setTitle:dic[@"name"] textColor:MAIN_COLOR];
+        if(self.effectHide){
+            [cell setTitle:dic[@"name"] textColor:[UIColor whiteColor]];
+        }else{
+            [cell setTitle:dic[@"name"] textColor:MAIN_COLOR];
+        }
     }else{
         [cell setTitle:dic[@"name"] textColor:self.isThemeWhite ? [UIColor blackColor] : FBColors(255, 1.0)];
     }
@@ -101,17 +105,33 @@ static NSString *const FBBeautyMenuViewCellId = @"FBBeautyMenuViewCellId";
     
 }
 
+-(void)setEffectHide:(_Bool)effectHide{
+    _effectHide = effectHide;
+    [self.menuCollectionView reloadData];
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.selectedIndexPath.row == indexPath.row) return;
-    
     NSDictionary *dic = self.listArr[indexPath.row];
-    if (self.onClickBlock) {
-        self.onClickBlock(dic[@"classify"]);
+    if (self.selectedIndexPath.row == indexPath.row) {
+        // 隐藏和不隐藏的状态切换
+        self.effectHide = !self.effectHide;
+        
+        if (self.onClickBlock) {
+            self.onClickBlock(dic[@"classify"],self.effectHide);
+        }
+      
+    }else{
+        self.effectHide = NO;
+        if (self.onClickBlock) {
+            self.onClickBlock(dic[@"classify"], self.effectHide);
+        }
+        if (!self.disabled) {
+            self.selectedIndexPath = indexPath;
+            [collectionView reloadData];
+        }
     }
-    if (!self.disabled) {
-        self.selectedIndexPath = indexPath;
-        [collectionView reloadData];
-    }
+    
+   
 }
 
 #pragma mark - 主题色切换

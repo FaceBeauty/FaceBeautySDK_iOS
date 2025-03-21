@@ -149,7 +149,7 @@
         _superWindow.userInteractionEnabled = YES;
         
         // 设置事件穿透区域（例如一个矩形区域）
-        _superWindow.passThroughArea = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 350); // x, y, width, height
+//        _superWindow.passThroughArea = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 350); // x, y, width, height
         
         [_superWindow makeKeyAndVisible];
         _superWindow.hidden = YES;
@@ -196,9 +196,9 @@
     if (!_exitTapView) {
 //        _exitTapView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, FBScreenWidth, FBScreenHeight - FBHeight(170))];
         _exitTapView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,0,0)];
-        _exitTapView.backgroundColor = FBColor(100, 100, 100, 0.5);
+//        _exitTapView.backgroundColor = FBColor(100, 100, 100, 0.5);
         _exitTapView.hidden = YES;
-        _exitTapView.userInteractionEnabled = YES;
+        _exitTapView.userInteractionEnabled = NO;
 //        [_exitTapView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onExitTap)]];
     }
     return _exitTapView;
@@ -247,10 +247,19 @@
 - (FBBeautyView *)beautyView{
     if (!_beautyView) {
         _beautyView = [[FBBeautyView alloc] initWithFrame:CGRectMake(0,FBScreenHeight, FBScreenWidth, FBHeight(326))];
+        WeakSelf
+        [_beautyView setHideFunctionBarBlock:^(_Bool Hide) {
+            if (Hide) {
+                weakSelf.showStatus = ShowOnlyMenu;
+                [weakSelf cameraButtonShow:ShowOnlyMenu];
+            }else{
+                weakSelf.showStatus = ShowBeauty;
+                [weakSelf cameraButtonShow:ShowBeauty];
+            }
+        }];
     }
     return _beautyView;
 }
-
 //- (HTARItemView *)itemView{
 //    if (!_itemView) {
 //        _itemView = [[HTARItemView alloc] initWithFrame:CGRectMake(0,FBScreenHeight, FBScreenWidth, FBHeight(278))];
@@ -358,6 +367,7 @@
             self.beautyView.isThemeWhite = YES;
         }
     }
+    self.beautyView.isHide = YES;
     self.exitTapView.hidden = NO;
     self.superWindow.hidden = NO;
     self.exitEnable = false;
@@ -368,8 +378,8 @@
     [UIView animateWithDuration:0.3 animations:^{
         self.beautyView.frame = CGRectMake(0, FBScreenHeight - FBHeight(326), FBScreenWidth, FBHeight(326));
     }completion:^(BOOL finished) {
-        self.showStatus = ShowBeauty;
-        [self cameraButtonShow:self.showStatus];
+//        self.showStatus = ShowBeauty;
+//        [self cameraButtonShow:self.showStatus];
 //        self.exitTapView.frame = CGRectMake(0, 0, FBScreenWidth, FBScreenHeight - FBHeight(326));
         self.exitEnable = true;
     }];
@@ -706,7 +716,8 @@
 - (void)cameraButtonShow:(ShowStatus)status {
     
     if ([self.delegate respondsToSelector:@selector(didCameraCaptureButtonShow:)]) {
-        [self.delegate didCameraCaptureButtonShow:status==0 || status==5 ? NO : YES];
+        [self.delegate didCameraCaptureButtonShow:status];
+//        status==0 || status==5 ? NO : YES
     }
 }
 

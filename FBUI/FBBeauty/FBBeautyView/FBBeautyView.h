@@ -22,6 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isThemeWhite;
 
+@property (nonatomic, copy) void (^hideFunctionBarBlock)(bool Hide);
+
+@property (nonatomic, assign) BOOL isHide;
+
 @end
 
 NS_ASSUME_NONNULL_END

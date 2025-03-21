@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, ShowStatus) {
     ShowHair        = 8,
     ShowBody        = 9,
     ShowFBFun        = 10,
+    ShowOnlyMenu    =11
 };
 
 @protocol FBUIManagerDelegate <NSObject>
@@ -43,7 +44,8 @@ typedef NS_ENUM(NSInteger, ShowStatus) {
 /**
  * 显示或隐藏外部拍照按钮
  */
-- (void)didCameraCaptureButtonShow:(BOOL)show;
+//- (void)didCameraCaptureButtonShow:(BOOL)show;
+- (void)didCameraCaptureButtonShow:(ShowStatus)status;
 
 @end
 

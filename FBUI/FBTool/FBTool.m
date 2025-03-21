@@ -55,7 +55,7 @@
     [FBTool setFloatValue:0 forKey:FB_EFFECT_FILTER_SELECTED_POSITION];
     [FBTool setFloatValue:0 forKey:FB_HAHA_FILTER_SELECTED_POSITION];
     // 效果 - 风格滤镜本地缓存
-    [[FaceBeauty shareInstance] setFilter:FBFilterBeauty name:FilterStyleDefaultName value:100];
+    [[FaceBeauty shareInstance] setFilter:FBFilterBeauty name:FilterStyleDefaultName value:40];
     [[FaceBeauty shareInstance] setFilter:FBFilterEffect name:@"0"];
     [[FaceBeauty shareInstance] setFilter:FBFilterFunny name:@"0"];
     
@@ -120,18 +120,18 @@
     // TODO: 增加风格滤镜缓存初始化
     NSString *filterStyleName = [FBTool getObjectForKey:FB_STYLE_FILTER_NAME];
     if (filterStyleName) {
-        [[FaceBeauty shareInstance] setFilter:FBFilterBeauty name:filterStyleName value:100];
+        [[FaceBeauty shareInstance] setFilter:FBFilterBeauty name:filterStyleName value:40];
     }else {
         [FBTool setObject:FilterStyleDefaultName forKey:FB_STYLE_FILTER_NAME];
         [FBTool setFloatValue:FilterStyleDefaultPositionIndex forKey:FB_STYLE_FILTER_SELECTED_POSITION];
-        [[FaceBeauty shareInstance] setFilter:FBFilterBeauty name:FilterStyleDefaultName value:100];
+        [[FaceBeauty shareInstance] setFilter:FBFilterBeauty name:FilterStyleDefaultName value:40];
     }
     
     
     
     /* =============《 滤镜 TODO:滤镜拉条不单独保存 以下代码更换 》=================================== */
     if (![FBTool judgeCacheValueIsNullForKey:FB_STYLE_FILTER_SLIDER]) {
-        [FBTool setFloatValue:100 forKey:FB_STYLE_FILTER_SLIDER];
+        [FBTool setFloatValue:40 forKey:FB_STYLE_FILTER_SLIDER];
     }
 //    if (![FBTool judgeCacheValueIsNullForKey:FB_EFFECT_FILTER_SLIDER]) {
 //        [FBTool setFloatValue:100 forKey:FB_EFFECT_FILTER_SLIDER];

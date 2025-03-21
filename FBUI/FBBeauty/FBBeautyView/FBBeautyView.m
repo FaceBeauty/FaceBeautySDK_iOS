@@ -49,100 +49,111 @@
 @end
 
 @implementation FBBeautyView
-/*
-- (instancetype)initWithFrame:(CGRect)frame{
-    
-    self = [super initWithFrame:frame];
-    self.skinBeautyArray = [FBTool jsonModeForPath:HTSkinBeautyPath withKey:@"HTSkinBeauty"];
-    self.faceBeautyArray = [FBTool jsonModeForPath:HTFaceBeautyPath withKey:@"HTFaceBeauty"];
-    if (self) {
-        // 获取文件路径
-//        stylePath = [[NSBundle mainBundle] pathForResource:@"HTStyleBeauty" ofType:@"json"];
-        self.currentType = FB_SKIN_SLIDER;
-        self.currentModel = [[FBModel alloc] initWithDic:self.skinBeautyArray[0]];
-        [self addSubview:self.sliderRelatedView];
-        [self.sliderRelatedView.sliderView setSliderType:self.currentModel.sliderType WithValue:[FBTool getFloatValueForKey:self.currentModel.key]];
-        [self.sliderRelatedView setHidden:NO];
-        [self.sliderRelatedView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.top.equalTo(self);
-            make.height.mas_equalTo(FBHeight(53));
-        }];
-        [self addSubview:self.containerView];
-        [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.equalTo(self);
-            make.height.mas_equalTo(FBHeight(258));
-        }];
-        [self.containerView addSubview:self.menuView];
-        [self.containerView addSubview:self.effectView];
-        [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.left.right.equalTo(self.containerView);
-//            make.height.mas_equalTo(FBHeight(45));
-            make.top.equalTo(self.effectView.mas_bottom).offset(FBHeight(23)); // 根据需要调整offset值
-            make.left.right.equalTo(self.containerView);
-            make.height.mas_equalTo(FBHeight(45));
-        }];
-        [self.containerView addSubview:self.lineView];
-        [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self.containerView);
-            make.top.equalTo(self.menuView.mas_bottom);
-            make.height.mas_equalTo(0.5);
-        }];
-//        [self.containerView addSubview:self.effectView];
-        [self.effectView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.lineView.mas_bottom).offset(FBHeight(23));
-            make.left.right.equalTo(self.containerView);
-            make.height.mas_equalTo(FBHeight(82));
-        }];
-        [self addSubview:self.confirmLabel];
-        [self.confirmLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self);
-            make.top.equalTo(self).offset(-FBHeight(40));
-        }];
-        
-        [self checkResetButton];
-    }
-    return self;
-    
-}*/
 
+//- (instancetype)initWithFrame:(CGRect)frame {
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        
+//        self.skinBeautyArray = [FBTool jsonModeForPath:FBSkinBeautyPath withKey:@"FBSkinBeauty"];
+//        self.faceBeautyArray = [FBTool jsonModeForPath:FBFaceBeautyPath withKey:@"FBFaceBeauty"];
+//
+//        
+//        self.currentType = FB_SKIN_SLIDER;
+//        self.currentModel = [[FBModel alloc] initWithDic:self.skinBeautyArray[0]];
+// 
+//
+//        // 添加containerView并设置其约束
+//        [self addSubview:self.containerView];
+//        [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.right.bottom.equalTo(self);
+////            make.height.mas_equalTo(FBHeight(258));
+//            make.height.mas_equalTo(FBHeight(270));
+//        }];
+//
+//        // 将sliderRelatedView、menuView和effectView添加到containerView中
+//        [self.containerView addSubview:self.sliderRelatedView];
+//        [self.containerView addSubview:self.menuView];
+//        [self.containerView addSubview:self.effectView];
+//        [self.containerView addSubview:self.filterView];
+//
+//        
+//        [self.effectView mas_makeConstraints:^(MASConstraintMaker *make) {
+////            make.top.equalTo(self.containerView).offset(FBHeight(68)); // 根据需要调整偏移值
+//            make.top.equalTo(self.containerView).offset(FBHeight(68));
+//            make.left.right.equalTo(self.containerView);
+////            make.height.mas_equalTo(FBHeight(82));
+//            make.height.mas_equalTo(FBHeight(82));
+//        }];
+//        [self.filterView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.containerView).offset(FBHeight(68));
+//            make.left.right.equalTo(self.containerView);
+//            make.height.mas_equalTo(FBHeight(82));
+//        }];
+//        
+//        // 设置sliderRelatedView的约束，使其位于effectView上方
+//        [self.sliderRelatedView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            [self.sliderRelatedView.sliderView setSliderType:self.currentModel.sliderType WithValue:[FBTool getFloatValueForKey:self.currentModel.key]];
+//            [self.sliderRelatedView setHidden:NO];
+//            make.left.right.equalTo(self.containerView);
+//            make.height.mas_equalTo(FBHeight(53));
+//            make.bottom.equalTo(self.effectView.mas_top).offset(-FBHeight(10)); //
+//        }];
+//
+//        
+//        [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.effectView.mas_bottom).offset(FBHeight(15));
+//            make.left.right.equalTo(self.containerView);
+//            make.height.mas_equalTo(FBHeight(45));
+//        }];
+//
+//        [self addSubview:self.confirmLabel];
+//        [self.confirmLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.right.equalTo(self);
+//            make.top.equalTo(self).offset(-FBHeight(40));
+//        }];
+//        
+//        [self checkResetButton];
+//    }
+//    return self;
+//}
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         
         self.skinBeautyArray = [FBTool jsonModeForPath:FBSkinBeautyPath withKey:@"FBSkinBeauty"];
         self.faceBeautyArray = [FBTool jsonModeForPath:FBFaceBeautyPath withKey:@"FBFaceBeauty"];
-
+        
         
         self.currentType = FB_SKIN_SLIDER;
         self.currentModel = [[FBModel alloc] initWithDic:self.skinBeautyArray[0]];
- 
-
+        
+        
         // 添加containerView并设置其约束
         [self addSubview:self.containerView];
         [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(self);
-//            make.height.mas_equalTo(FBHeight(258));
-            make.height.mas_equalTo(FBHeight(270));
+            //            make.heigFB.mas_equalTo(FBHeigFB(258));
+            make.height.mas_equalTo(FBHeight(250));
         }];
-
+        
         // 将sliderRelatedView、menuView和effectView添加到containerView中
         [self.containerView addSubview:self.sliderRelatedView];
         [self.containerView addSubview:self.menuView];
         [self.containerView addSubview:self.effectView];
         [self.containerView addSubview:self.filterView];
-
+        
         
         [self.effectView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.containerView).offset(FBHeight(68)); // 根据需要调整偏移值
+            //            make.top.equalTo(self.containerView).offset(FBHeight(68)); // 根据需要调整偏移值
             make.top.equalTo(self.containerView).offset(FBHeight(68));
             make.left.right.equalTo(self.containerView);
-//            make.height.mas_equalTo(FBHeight(82));
-            make.height.mas_equalTo(FBHeight(82));
+            //            make.heigFB.mas_equalTo(FBHeigFB(82));
+            make.height.mas_equalTo(FBHeight(95));
         }];
         [self.filterView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.containerView).offset(FBHeight(68));
             make.left.right.equalTo(self.containerView);
-            make.height.mas_equalTo(FBHeight(82));
+            make.height.mas_equalTo(FBHeight(95));
         }];
         
         // 设置sliderRelatedView的约束，使其位于effectView上方
@@ -151,16 +162,16 @@
             [self.sliderRelatedView setHidden:NO];
             make.left.right.equalTo(self.containerView);
             make.height.mas_equalTo(FBHeight(53));
-            make.bottom.equalTo(self.effectView.mas_top).offset(-FBHeight(10)); //
+            make.bottom.equalTo(self.effectView.mas_top).offset(FBHeight(0)); //
         }];
-
+        
         
         [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.effectView.mas_bottom).offset(FBHeight(15));
             make.left.right.equalTo(self.containerView);
+            make.bottom.equalTo(self.containerView).offset(10-kSafeAreaBottom);
             make.height.mas_equalTo(FBHeight(45));
         }];
-
+        
         [self addSubview:self.confirmLabel];
         [self.confirmLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self);
@@ -194,7 +205,7 @@
         self.menuView.disabled = NO;
         [self.effectView setHidden:YES];
         [self.filterView setHidden:YES];
-
+        
         
         if ([name isEqualToString:[FBTool isCurrentLanguageChinese] ? @"美肤" : @"Skin"]) {
             //默认选择第一个
@@ -226,7 +237,7 @@
             [self.effectView setHidden:NO];
             [self.effectView updateResetButtonState:self.needResetShape];
         }else if([name isEqualToString:[FBTool isCurrentLanguageChinese] ? @"滤镜" : @"Filter"]){
-
+            
             [self.effectView setHidden:YES];
             [self.filterView setHidden:NO];
             self.currentType = FB_FILTER_SLIDER;
@@ -235,9 +246,7 @@
             
         }
     }
-    
 }
-
 - (void)updateEffect:(int)value{
     if (self.currentType == FB_MAKEUP_SLIDER) {
         // 设置美妆特效
@@ -406,17 +415,61 @@
     return _containerView;
 }
 
+//- (FBBeautyMenuView *)menuView{
+//    if (!_menuView) {
+//        _menuView = [[FBBeautyMenuView alloc] initWithFrame:CGRectZero listArr:self.listArr];
+//        WeakSelf
+//        [_menuView setOnClickBlock:^(NSArray *array) {
+//            [weakSelf setOnClickMenu:array];
+//        }];
+//        
+//    }
+//    return _menuView;
+//}
 - (FBBeautyMenuView *)menuView{
     if (!_menuView) {
         _menuView = [[FBBeautyMenuView alloc] initWithFrame:CGRectZero listArr:self.listArr];
         WeakSelf
-        [_menuView setOnClickBlock:^(NSArray *array) {
-            [weakSelf setOnClickMenu:array];
+        [_menuView setOnClickBlock:^(NSArray *array,BOOL hide) {
+            //通知外部
+            weakSelf.hideFunctionBarBlock(hide);
+            
+            if (hide) {
+                 
+                [UIView animateWithDuration:0.3 animations:^{
+                    // 先隐藏所有视图
+                    weakSelf.effectView.alpha = 0;
+                    weakSelf.filterView.alpha = 0;
+                    weakSelf.sliderRelatedView.alpha = 0;
+                    
+                    [weakSelf.containerView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.height.mas_equalTo(FBHeight(30+kSafeAreaBottom));
+                    }];
+                    [weakSelf.containerView.superview layoutIfNeeded];
+                }completion:nil];
+                
+            }else{
+               
+                
+                [UIView animateWithDuration:0.3 animations:^{
+                    weakSelf.effectView.alpha = 1;
+                    weakSelf.filterView.alpha = 1;
+                    weakSelf.sliderRelatedView.alpha = 1;
+                    
+                    [weakSelf.containerView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.height.mas_equalTo(FBHeight(250));
+                    }];
+                    [weakSelf.containerView .superview layoutIfNeeded];
+                }completion:nil];
+                
+                [weakSelf setOnClickMenu:array];
+            }
         }];
         
     }
     return _menuView;
 }
+
 
 - (UIView *)lineView{
     if (!_lineView) {
@@ -487,6 +540,32 @@
         
     }
     return _filterView;
+}
+
+- (void)setIsHide:(BOOL)isHide{
+    _isHide = isHide;
+    self.menuView.effectHide = isHide;
+    self.hideFunctionBarBlock(isHide);
+    if (isHide) {
+        // 先隐藏所有视图
+        self.effectView.alpha = 0;
+        self.filterView.alpha = 0;
+        self.sliderRelatedView.alpha = 0;
+        
+        [self.containerView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(FBHeight(30+kSafeAreaBottom));
+        }];
+      
+    }else{
+        
+        self.effectView.alpha = 1;
+        self.filterView.alpha = 1;
+        self.sliderRelatedView.alpha = 1;
+        
+        [self.containerView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(FBHeight(250));
+        }];
+    }
 }
 
 @end

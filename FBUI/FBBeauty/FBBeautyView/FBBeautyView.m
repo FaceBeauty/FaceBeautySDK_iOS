@@ -148,12 +148,12 @@
             make.top.equalTo(self.containerView).offset(FBHeight(68));
             make.left.right.equalTo(self.containerView);
             //            make.heigFB.mas_equalTo(FBHeigFB(82));
-            make.height.mas_equalTo(FBHeight(95));
+            make.height.mas_equalTo(FBHeight(82));
         }];
         [self.filterView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.containerView).offset(FBHeight(68));
             make.left.right.equalTo(self.containerView);
-            make.height.mas_equalTo(FBHeight(95));
+            make.height.mas_equalTo(FBHeight(82));
         }];
         
         // 设置sliderRelatedView的约束，使其位于effectView上方
@@ -162,7 +162,7 @@
             [self.sliderRelatedView setHidden:NO];
             make.left.right.equalTo(self.containerView);
             make.height.mas_equalTo(FBHeight(53));
-            make.bottom.equalTo(self.effectView.mas_top).offset(FBHeight(0)); //
+            make.bottom.equalTo(self.effectView.mas_top).offset(-FBHeight(10)); //
         }];
         
         

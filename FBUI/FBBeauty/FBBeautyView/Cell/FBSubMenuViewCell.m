@@ -2,6 +2,8 @@
 //  FBSubMenuViewCell.m
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2022/7/19.
+//
 
 #import "FBSubMenuViewCell.h"
 #import "FBUIConfig.h"

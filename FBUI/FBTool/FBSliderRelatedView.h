@@ -2,6 +2,8 @@
 //  FBSliderRelatedView.h
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2022/7/22.
+//
 
 #import <UIKit/UIKit.h>
 #import "FBSliderView.h"

@@ -42,9 +42,9 @@ static NSString *const FBFunContentViewCellId = @"FBFunContentViewCellId";
     _type = type;
     
     if (type == FBItemSticker) {
-        self.listArr  = [[FBTool jsonModeForPath:[[[FaceBeauty shareInstance] getARItemPathBy:0] stringByAppendingFormat:@"fb_sticker_config.json"] withKey:@"fb_sticker"] mutableCopy];
+        self.listArr  = [[FBTool jsonModeForPath:[[[FaceBeauty shareInstance] getARItemPathBy:0] stringByAppendingFormat:@"sticker_config.json"] withKey:@"sticker"] mutableCopy];
     }else if(type == FBItemMask){
-        self.listArr  = [[FBTool jsonModeForPath:[[[FaceBeauty shareInstance] getARItemPathBy:1] stringByAppendingFormat:@"fb_mask_config.json"] withKey:@"fb_mask"] mutableCopy];
+        self.listArr  = [[FBTool jsonModeForPath:[[[FaceBeauty shareInstance] getARItemPathBy:1] stringByAppendingFormat:@"mask_config.json"] withKey:@"mask"] mutableCopy];
     }
 
     
@@ -54,7 +54,7 @@ static NSString *const FBFunContentViewCellId = @"FBFunContentViewCellId";
     NSInteger index = 0;
     FBModel *model = [[FBModel alloc] initWithDic:self.listArr[index]];
     model.selected = YES;
-    NSDictionary *dic = [FBTool getDictionaryWithHTModel:model];
+    NSDictionary *dic = [FBTool getDictionaryWithFBModel:model];
     [self.listArr replaceObjectAtIndex:index withObject:dic];
     self.selectedModel = model;
     self.selectedIndex = index;
@@ -74,6 +74,7 @@ static NSString *const FBFunContentViewCellId = @"FBFunContentViewCellId";
         // 初始化默认选择效果
         //             NSInteger index = [FBTool getFloatValueForKey:FB_STYLE_FILTER_SELECTED_POSITION];
         [self collectionView:self.menuCollectionView didSelectItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+        [self.menuCollectionView reloadData];
     });
 }
 
@@ -114,10 +115,10 @@ static NSString *const FBFunContentViewCellId = @"FBFunContentViewCellId";
     
     
     indexModel.selected = true;
-    [self.listArr replaceObjectAtIndex:indexPath.row withObject:[FBTool getDictionaryWithHTModel:indexModel]];
+    [self.listArr replaceObjectAtIndex:indexPath.row withObject:[FBTool getDictionaryWithFBModel:indexModel]];
     self.selectedModel.selected = false;
     
-    [self.listArr replaceObjectAtIndex:self.selectedIndex withObject:[FBTool getDictionaryWithHTModel:self.selectedModel]];
+    [self.listArr replaceObjectAtIndex:self.selectedIndex withObject:[FBTool getDictionaryWithFBModel:self.selectedModel]];
     [collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.selectedIndex inSection:0],indexPath]];
     self.selectedModel = indexModel;
     self.selectedIndex = indexPath.row;
@@ -166,5 +167,8 @@ static NSString *const FBFunContentViewCellId = @"FBFunContentViewCellId";
     return _menuCollectionView;
 }
 
+-(void)dealloc{
+    NSLog(@"FBFunContentView ---- ");
+}
 
 @end

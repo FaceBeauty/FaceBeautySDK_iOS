@@ -14,6 +14,8 @@
 typedef NS_ENUM(NSInteger, EffectType) {
     FB_Beauty = 0, // 美肤
     FB_Reshape = 1,// 美型
+    FB_FaceShape = 2,// 脸型
+//    FB_Hair = 3,   // 美发
 };
 
 @property (nonatomic, strong) FBButton *resetButton;
@@ -27,7 +29,7 @@ typedef NS_ENUM(NSInteger, EffectType) {
 
 @end
 
-static NSString *const HTBeautyEffectViewCellId = @"HTBeautyEffectViewCellId";
+static NSString *const FBBeautyEffectViewCellId = @"FBBeautyEffectViewCellId";
 
 @implementation FBBeautyEffectView
 
@@ -84,40 +86,41 @@ static NSString *const HTBeautyEffectViewCellId = @"HTBeautyEffectViewCellId";
 
 // 返回对应indexPath的cell
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    FBBeautyEffectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HTBeautyEffectViewCellId forIndexPath:indexPath];
+
+    FBBeautyEffectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:FBBeautyEffectViewCellId forIndexPath:indexPath];
     FBModel *indexModel = [[FBModel alloc] initWithDic:self.listArr[indexPath.row]];
-    
+
     [cell setSkinShapeModel:indexModel themeWhite:self.isThemeWhite];
-    
+
     return cell;
-    
+
 };
 
 // 选择了某个cell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
+
     FBModel *indexModel = [[FBModel alloc] initWithDic:self.listArr[indexPath.row]];
+
     if (indexModel.opened) {
         [self openSubCell:collectionView withOpened:self.subCellOpened withStartIndex:(int)indexPath.row];
         if (!indexModel.selected) {
             indexModel.selected = true;
             //刷新数组里的数据
-            [self.listArr replaceObjectAtIndex:indexPath.row withObject:[FBTool getDictionaryWithHTModel:indexModel]];
+            [self.listArr replaceObjectAtIndex:indexPath.row withObject:[FBTool getDictionaryWithFBModel:indexModel]];
             self.selectedModel.selected = false;
             int lastSelectIndex = [self getIndexForTitle:self.selectedModel.title withArray:self.listArr];
-            [self.listArr replaceObjectAtIndex:lastSelectIndex withObject:[FBTool getDictionaryWithHTModel:self.selectedModel]];
+            [self.listArr replaceObjectAtIndex:lastSelectIndex withObject:[FBTool getDictionaryWithFBModel:self.selectedModel]];
             [collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:lastSelectIndex inSection:0],[NSIndexPath indexPathForRow:indexPath.row inSection:0]]];
             //展开后选择展开后的第一个
             FBModel *newModel = [[FBModel alloc] initWithDic:self.listArr[2]];
             self.selectedModel = newModel;
         }else{
             indexModel.selected = false;
-            [self.listArr replaceObjectAtIndex:indexPath.row withObject:[FBTool getDictionaryWithHTModel:indexModel]];
+            [self.listArr replaceObjectAtIndex:indexPath.row withObject:[FBTool getDictionaryWithFBModel:indexModel]];
             //默认选择第一个
             FBModel *newModel = [[FBModel alloc] initWithDic:self.listArr[0]];
             newModel.selected = true;
-            [self.listArr replaceObjectAtIndex:0 withObject:[FBTool getDictionaryWithHTModel:newModel]];
+            [self.listArr replaceObjectAtIndex:0 withObject:[FBTool getDictionaryWithFBModel:newModel]];
             [collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:indexPath.row inSection:0]]];
             self.selectedModel = newModel;
         }
@@ -129,37 +132,72 @@ static NSString *const HTBeautyEffectViewCellId = @"HTBeautyEffectViewCellId";
                 }
                 indexModel.selected = true;
                 int nowSelectIndex = [self getIndexForTitle:indexModel.title withArray:self.listArr];
-                [self.listArr replaceObjectAtIndex:nowSelectIndex withObject:[FBTool getDictionaryWithHTModel:indexModel]];
+                [self.listArr replaceObjectAtIndex:nowSelectIndex withObject:[FBTool getDictionaryWithFBModel:indexModel]];
                 self.selectedModel.selected = false;
                 int lastSelectIndex = [self getIndexForTitle:self.selectedModel.title withArray:self.listArr];
-                [self.listArr replaceObjectAtIndex:lastSelectIndex withObject:[FBTool getDictionaryWithHTModel:self.selectedModel]];
+                [self.listArr replaceObjectAtIndex:lastSelectIndex withObject:[FBTool getDictionaryWithFBModel:self.selectedModel]];
                 [collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:lastSelectIndex inSection:0],[NSIndexPath indexPathForRow:nowSelectIndex inSection:0]]];
             }else{
                 [self openSubCell:collectionView withOpened:self.subCellOpened withStartIndex:1];
                 indexModel.selected = true;
                 int nowSelectIndex = [self getIndexForTitle:indexModel.title withArray:self.listArr];
-                [self.listArr replaceObjectAtIndex:nowSelectIndex withObject:[FBTool getDictionaryWithHTModel:indexModel]];
+                [self.listArr replaceObjectAtIndex:nowSelectIndex withObject:[FBTool getDictionaryWithFBModel:indexModel]];
                 FBModel *newModel = [[FBModel alloc] initWithDic:self.listArr[1]];
                 newModel.selected = false;
-                [self.listArr replaceObjectAtIndex:1 withObject:[FBTool getDictionaryWithHTModel:newModel]];
+                [self.listArr replaceObjectAtIndex:1 withObject:[FBTool getDictionaryWithFBModel:newModel]];
                 [collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0],[NSIndexPath indexPathForRow:nowSelectIndex inSection:0]]];
             }
         }else{
             if ([self.selectedModel.title isEqualToString:indexModel.title]) {
                 return;
             }
-            indexModel.selected = true;
-            [self.listArr replaceObjectAtIndex:indexPath.row withObject:[FBTool getDictionaryWithHTModel:indexModel]];
-            self.selectedModel.selected = false;
-            int lastSelectIndex = [self getIndexForTitle:self.selectedModel.title withArray:self.listArr];
-            [self.listArr replaceObjectAtIndex:lastSelectIndex withObject:[FBTool getDictionaryWithHTModel:self.selectedModel]];
-            [collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:lastSelectIndex inSection:0],indexPath]];
+
+            // 脸型是互斥的：先取消所有选中状态，然后只选中当前这个
+            if (self.currentType == FB_FaceShape) {
+                // 清除所有脸型的选中状态
+                NSMutableArray *indexPathsToReload = [NSMutableArray array];
+                for (int i = 0; i < self.listArr.count; i++) {
+                    FBModel *model = [[FBModel alloc] initWithDic:self.listArr[i]];
+                    if (model.selected) {
+                        model.selected = false;
+                        [self.listArr replaceObjectAtIndex:i withObject:[FBTool getDictionaryWithFBModel:model]];
+                        [indexPathsToReload addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                    }
+                }
+                // 选中当前这个
+                indexModel.selected = true;
+                [self.listArr replaceObjectAtIndex:indexPath.row withObject:[FBTool getDictionaryWithFBModel:indexModel]];
+                [indexPathsToReload addObject:indexPath];
+
+                // 刷新所有受影响的cell
+                [collectionView reloadItemsAtIndexPaths:indexPathsToReload];
+            } else {
+                // 美肤/美型：只处理当前和上一个
+                indexModel.selected = true;
+                [self.listArr replaceObjectAtIndex:indexPath.row withObject:[FBTool getDictionaryWithFBModel:indexModel]];
+                self.selectedModel.selected = false;
+                int lastSelectIndex = [self getIndexForTitle:self.selectedModel.title withArray:self.listArr];
+                [self.listArr replaceObjectAtIndex:lastSelectIndex withObject:[FBTool getDictionaryWithFBModel:self.selectedModel]];
+                [collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:lastSelectIndex inSection:0],indexPath]];
+            }
         }
         self.selectedModel = indexModel;
     }
     
     if (self.onUpdateSliderHiddenBlock) {
         self.onUpdateSliderHiddenBlock(self.selectedModel);
+    }
+
+    // 如果是脸型类型，通知外部选中了脸型
+    if (self.currentType == FB_FaceShape) {
+        if (self.onFaceShapeSelectedBlock) {
+            // 获取当前滑动条的值，如果没有则默认50
+            int currentProgress = [FBTool getFloatValueForKey:indexModel.key];
+            if (currentProgress == 0) {
+                currentProgress = 50;
+            }
+            self.onFaceShapeSelectedBlock(indexModel, currentProgress);
+        }
     }
 }
 
@@ -175,7 +213,7 @@ static NSString *const HTBeautyEffectViewCellId = @"HTBeautyEffectViewCellId";
             @"opened": @(false),
             @"icon":@"hazyBlurriness.png",
             @"selectedIcon":@"hazyBlurriness_selected.png",
-            @"key":@"HT_SKIN_HAZYBLURRINESS_SLIDER",
+            @"key":@"FB_SKIN_HAZYBLURRINESS_SLIDER",
             @"defaultValue":@(0),
             @"sliderType":@(1),
         };
@@ -187,7 +225,7 @@ static NSString *const HTBeautyEffectViewCellId = @"HTBeautyEffectViewCellId";
             @"opened": @(false),
             @"icon":@"fineBlurriness.png",
             @"selectedIcon":@"fineBlurriness_selected.png",
-            @"key":@"HT_SKIN_FINEBLURRINESS_SLIDER",
+            @"key":@"FB_SKIN_FINEBLURRINESS_SLIDER",
             @"defaultValue":@(60),
             @"sliderType":@(1),
         };
@@ -196,8 +234,8 @@ static NSString *const HTBeautyEffectViewCellId = @"HTBeautyEffectViewCellId";
         
         [collectionView performBatchUpdates:^{
             // 保持collectionView的item和数据源一致
-            [self.listArr insertObject:[FBTool getDictionaryWithHTModel:mode1] atIndex:startIndex+1];
-            [self.listArr insertObject:[FBTool getDictionaryWithHTModel:mode2] atIndex:startIndex+2];
+            [self.listArr insertObject:[FBTool getDictionaryWithFBModel:mode1] atIndex:startIndex+1];
+            [self.listArr insertObject:[FBTool getDictionaryWithFBModel:mode2] atIndex:startIndex+2];
             // 然后在此indexPath处插入给collectionView插入两个item
             [collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:startIndex+1 inSection:0]]];
             [collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:startIndex+2 inSection:0]]];
@@ -228,22 +266,36 @@ static NSString *const HTBeautyEffectViewCellId = @"HTBeautyEffectViewCellId";
 
 #pragma mark - 外部menu点击后的刷新collectionview
 - (void)updateBeautyAndShapeEffectData:(NSDictionary *)dic{
-    
+
 //    NSDictionary *dic = notification.object;
     self.listArr = [dic[@"data"] mutableCopy];
     self.currentType = [dic[@"type"] integerValue];
-    self.selectedModel = [[FBModel alloc] initWithDic:self.listArr[0]];
+
+    // 对于脸型，查找数据中已选中的那个，否则默认选第一个
+    if (self.currentType == FB_FaceShape) {
+        self.selectedModel = [[FBModel alloc] initWithDic:self.listArr[0]];
+        for (NSDictionary *itemDic in self.listArr) {
+            FBModel *tempModel = [[FBModel alloc] initWithDic:itemDic];
+            if (tempModel.selected) {
+                self.selectedModel = tempModel;
+                break;
+            }
+        }
+    } else {
+        self.selectedModel = [[FBModel alloc] initWithDic:self.listArr[0]];
+    }
+
     [self.menuCollectionView reloadData];
-    
+
 }
 
 - (void)updateResetButtonState:(BOOL)state{
     if (state) {
-        [self.resetButton setImage:[UIImage imageNamed:self.isThemeWhite ? @"34_fb_reset" : @"fb_reset"] imageWidth:FBWidth(45) title:[FBTool isCurrentLanguageChinese] ? @"恢复" : @"Restore"];
+        [self.resetButton setImage:[UIImage imageNamed:self.isThemeWhite ? @"34_ht_reset" : @"fb_reset"] imageWidth:FBWidth(45) title:[FBTool isCurrentLanguageChinese] ? @"恢复" : @"Restore"];
         [self.resetButton setTextColor:self.isThemeWhite ? [UIColor blackColor] : FBColors(255, 1.0)];
         self.resetButton.enabled = YES;
     }else {
-        [self.resetButton setImage:[UIImage imageNamed:self.isThemeWhite ? @"34_fb_reset_disabled" : @"fb_reset_disabled"] imageWidth:FBWidth(45) title:[FBTool isCurrentLanguageChinese] ? @"恢复" : @"Restore"];
+        [self.resetButton setImage:[UIImage imageNamed:self.isThemeWhite ? @"34_ht_reset_disabled" : @"fb_reset_disabled"] imageWidth:FBWidth(45) title:[FBTool isCurrentLanguageChinese] ? @"恢复" : @"Restore"];
         [self.resetButton setTextColor:FBColors(189, 0.6)];
         self.resetButton.enabled = NO;
     }
@@ -258,11 +310,17 @@ static NSString *const HTBeautyEffectViewCellId = @"HTBeautyEffectViewCellId";
             [FBTool setFloatValue:model.defaultValue forKey:model.key];
             [[FaceBeauty shareInstance] setBeauty:model.idCard value:(int)model.defaultValue];
         }
-    }else{
+    }else if (self.currentType == FB_Reshape) {
         for (int i = 0; i < self.listArr.count; i++) {
             FBModel *model = [[FBModel alloc] initWithDic:self.listArr[i]];
             [FBTool setFloatValue:model.defaultValue forKey:model.key];
             [[FaceBeauty shareInstance] setReshape:model.idCard value:(int)model.defaultValue];
+        }
+    }else if (self.currentType == FB_FaceShape) {
+        // 重置脸型：将所有脸型的滑动条值恢复到默认值50
+        for (int i = 0; i < self.listArr.count; i++) {
+            FBModel *model = [[FBModel alloc] initWithDic:self.listArr[i]];
+            [FBTool setFloatValue:50 forKey:model.key];
         }
     }
     int lastSelectIndex = -1;
@@ -270,16 +328,16 @@ static NSString *const HTBeautyEffectViewCellId = @"HTBeautyEffectViewCellId";
         [self openSubCell:self.menuCollectionView withOpened:self.subCellOpened withStartIndex:1];
         FBModel *newModel2 = [[FBModel alloc] initWithDic:self.listArr[1]];
         newModel2.selected = false;
-        [self.listArr replaceObjectAtIndex:1 withObject:[FBTool getDictionaryWithHTModel:newModel2]];
+        [self.listArr replaceObjectAtIndex:1 withObject:[FBTool getDictionaryWithFBModel:newModel2]];
     }else{
         self.selectedModel.selected = false;
         lastSelectIndex = [self getIndexForTitle:self.selectedModel.title withArray:self.listArr];
-        [self.listArr replaceObjectAtIndex:lastSelectIndex withObject:[FBTool getDictionaryWithHTModel:self.selectedModel]];
+        [self.listArr replaceObjectAtIndex:lastSelectIndex withObject:[FBTool getDictionaryWithFBModel:self.selectedModel]];
     }
     //默认选择第一个
     FBModel *newModel1 = [[FBModel alloc] initWithDic:self.listArr[0]];
     newModel1.selected = true;
-    [self.listArr replaceObjectAtIndex:0 withObject:[FBTool getDictionaryWithHTModel:newModel1]];
+    [self.listArr replaceObjectAtIndex:0 withObject:[FBTool getDictionaryWithFBModel:newModel1]];
     [self.menuCollectionView reloadData];
     if (lastSelectIndex == -1) {
         [self.menuCollectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:1 inSection:0]]];
@@ -287,7 +345,7 @@ static NSString *const HTBeautyEffectViewCellId = @"HTBeautyEffectViewCellId";
         [self.menuCollectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:lastSelectIndex inSection:0],[NSIndexPath indexPathForRow:0 inSection:0]]];
     }
     self.selectedModel = newModel1;
-    
+
 }
 
 #pragma mark - 主题切换
@@ -330,7 +388,7 @@ static NSString *const HTBeautyEffectViewCellId = @"HTBeautyEffectViewCellId";
         _menuCollectionView.backgroundColor = [UIColor clearColor];
         _menuCollectionView.dataSource= self;
         _menuCollectionView.delegate = self;
-        [_menuCollectionView registerClass:[FBBeautyEffectViewCell class] forCellWithReuseIdentifier:HTBeautyEffectViewCellId];
+        [_menuCollectionView registerClass:[FBBeautyEffectViewCell class] forCellWithReuseIdentifier:FBBeautyEffectViewCellId];
     }
     return _menuCollectionView;
 }

@@ -2,7 +2,8 @@
 //  FBFilterStyleViewCell.h
 //  FaceBeautyDemo
 //
-
+//  Created by Texeljoy Tech on 2022/7/20.
+//
 
 #import <UIKit/UIKit.h>
 @class FBModel;

@@ -2,12 +2,14 @@
 //  FBSliderView.h
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2022/7/22.
+//
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, HTSliderType) {
-    HTSliderTypeI = 1,// 1~100
-    HTSliderTypeII = 2// -50~50
+typedef NS_ENUM(NSInteger, FBSliderType) {
+    FBSliderTypeI = 1,// 1~100
+    FBSliderTypeII = 2// -50~50
 };
 
 @interface FBSliderView : UISlider
@@ -25,6 +27,6 @@ typedef NS_ENUM(NSInteger, HTSliderType) {
 // 调整标记view大小
 - (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size;
 // 设置滑动条类型&参数
-- (void)setSliderType:(HTSliderType)sliderType WithValue:(float)value;
+- (void)setSliderType:(FBSliderType)sliderType WithValue:(float)value;
 
 @end

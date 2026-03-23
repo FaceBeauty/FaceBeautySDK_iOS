@@ -2,6 +2,8 @@
 //  FBBeautyEffectViewCell.h
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2022/7/19.
+//
 
 #import <UIKit/UIKit.h>
 #import "FBButton.h"

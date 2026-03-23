@@ -2,6 +2,8 @@
 //  FBTool.h
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2022/7/18.
+//
 
 #import <UIKit/UIKit.h>
 #import "FBUIConfig.h"
@@ -9,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-//static  NSString * _Nonnull const HTScreenCurtainColorMap[3];
+//static  NSString * _Nonnull const FBScreenCurtainColorMap[3];
 
 @interface FBTool : NSObject
 
@@ -41,8 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)setBeautySlider:(float)value forType:(FBDataCategoryType)type withSelectMode:(FBModel *)selectModel;
 
-// HTModel——>NSDictionary
-+ (NSDictionary*)getDictionaryWithHTModel:(id)object;
+// FBModel——>NSDictionary
++ (NSDictionary*)getDictionaryWithFBModel:(id)object;
 
 //判断缓存的值是否为空
 + (NSString *)judgeCacheValueIsNullForKey:(NSString *)key;
@@ -64,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)getImageFromeURL:(NSString *)fileURL folder:(NSString *)folder cachePaths:(NSString *)cachePaths downloadComplete:(void(^) (UIImage *image))completeBlock;
 
 //特效互斥逻辑
-//+(BOOL)mutualExclusion:(NSString *)positionType;
++(BOOL)mutualExclusion:(NSString *)positionType;
 
 /// 当前正在活动的的vc
 extern UIViewController * GetCurrentActivityViewController(void);
@@ -74,6 +76,8 @@ extern UIViewController * GetCurrentActivityViewController(void);
  */
 + (void)resetAll;
 
+#pragma mark - 重置部分
++ (void)resetSome;
 /**
  *  弹框
  */

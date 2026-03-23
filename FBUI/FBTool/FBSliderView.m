@@ -2,13 +2,15 @@
 //  FBSliderView.m
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2022/7/22.
+//
 
 #import "FBSliderView.h"
 #import "FBUIConfig.h"
 
 @interface FBSliderView ()<UIGestureRecognizerDelegate>{
     CGRect _trackRect;
-    HTSliderType _sliderType;
+    FBSliderType _sliderType;
 }
 
 @property (nonatomic, strong) UITapGestureRecognizer *htTapGesture;
@@ -91,17 +93,17 @@
     //    [_slider setValue:value animated:YES];
 }
 
-- (void)setSliderType:(HTSliderType)sliderType WithValue:(float)value{
+- (void)setSliderType:(FBSliderType)sliderType WithValue:(float)value{
     _sliderType = sliderType;
     [self refreshWithValue:value isSet:YES];
-    if (sliderType == HTSliderTypeI)
+    if (sliderType == FBSliderTypeI)
     {
         self.splitPoint.hidden = YES;
         self.minimumValue = 0;
         self.maximumValue = 100;
         self.slideBar.layer.cornerRadius = FBHeight(4)/2;
         [self setValue:value animated:YES];
-    }else if (sliderType == HTSliderTypeII){
+    }else if (sliderType == FBSliderTypeII){
         self.splitPoint.hidden = NO;
         self.minimumValue = -50;
         self.maximumValue = 50;
@@ -143,11 +145,11 @@
     if(self.valueBlock){
         self.valueBlock(value);
     }
-    if (self->_sliderType == HTSliderTypeI)
+    if (self->_sliderType == FBSliderTypeI)
     {
         self.slideBar.frame = CGRectMake(0, 0, self->_trackRect.origin.x + FBWidth(15)/2, FBHeight(4));
     }
-    else if (self->_sliderType == HTSliderTypeII)
+    else if (self->_sliderType == FBSliderTypeII)
     {
         CGFloat W = -(self.frame.size.width/2 - (self->_trackRect.origin.x + FBWidth(15)/2));
         self.slideBar.frame = CGRectMake(self.frame.size.width/2, 0, W, FBHeight(4));

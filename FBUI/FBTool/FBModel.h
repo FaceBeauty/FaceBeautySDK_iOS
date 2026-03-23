@@ -2,6 +2,8 @@
 //  FBModel.h
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2022/7/18.
+//
 
 #import <Foundation/Foundation.h>
 
@@ -23,6 +25,7 @@
 @property (nonatomic, strong) NSString *category;
 @property (nonatomic, assign) NSInteger download;// 0:未下载 1:下载中 2:已下载/本地加载
 @property (nonatomic, strong) NSString *type;// bundle中美妆部分功能的（口红、眉毛、腮红）json用
+@property (nonatomic, strong) NSDictionary *reshapeValues;// 脸型对应的美型参数值
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 

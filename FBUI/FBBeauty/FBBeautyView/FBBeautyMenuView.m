@@ -13,6 +13,8 @@
 
 @property (nonatomic, strong) NSArray *listArr;
 
+
+
 @end
 
 static NSString *const FBBeautyMenuViewCellId = @"FBBeautyMenuViewCellId";
@@ -74,9 +76,6 @@ static NSString *const FBBeautyMenuViewCellId = @"FBBeautyMenuViewCellId";
     return self.listArr.count;
 }
 
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    return CGSizeMake(FBWidth(140) ,FBHeight(45));
-//}
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat totalWidth = collectionView.bounds.size.width;
     CGFloat spacing = 0;
@@ -84,7 +83,7 @@ static NSString *const FBBeautyMenuViewCellId = @"FBBeautyMenuViewCellId";
     
     
     CGFloat itemWidth = (totalWidth - ((itemCount + 1) * spacing)) / itemCount;
-    return CGSizeMake(itemWidth, FBHeight(45));
+    return CGSizeMake(itemWidth, kMenuViewHeight);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -97,6 +96,8 @@ static NSString *const FBBeautyMenuViewCellId = @"FBBeautyMenuViewCellId";
         }else{
             [cell setTitle:dic[@"name"] textColor:MAIN_COLOR];
         }
+        
+        
     }else{
         [cell setTitle:dic[@"name"] textColor:self.isThemeWhite ? [UIColor blackColor] : FBColors(255, 1.0)];
     }
@@ -133,6 +134,8 @@ static NSString *const FBBeautyMenuViewCellId = @"FBBeautyMenuViewCellId";
     
    
 }
+ 
+
 
 #pragma mark - 主题色切换
 - (void)setIsThemeWhite:(BOOL)isThemeWhite {

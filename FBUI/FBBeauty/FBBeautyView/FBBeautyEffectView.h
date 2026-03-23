@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) void (^onClickResetBlock)(void);
 @property (nonatomic,copy) void (^onUpdateSliderHiddenBlock)(FBModel *model);
+@property (nonatomic,copy) void (^onFaceShapeSelectedBlock)(FBModel *faceShapeModel, int progress);
 
 - (instancetype)initWithFrame:(CGRect)frame listArr:(NSArray *)listArr;
 - (void)updateResetButtonState:(BOOL)state;

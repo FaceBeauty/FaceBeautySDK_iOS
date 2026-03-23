@@ -2,6 +2,8 @@
 //  FBSliderRelatedView.m
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2022/7/22.
+//
 
 #import "FBSliderRelatedView.h"
 #import "FBUIConfig.h"

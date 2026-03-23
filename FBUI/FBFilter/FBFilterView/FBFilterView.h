@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FBSliderRelatedView.h"
+#import "FBUIConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 /**
@@ -15,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
  
  */
 @interface FBFilterView : UIView
+
+// FB内部模块拆开展示，重写初始化方法
+- (instancetype)initWithFrame:(CGRect)frame filterType:(FBFilterType)filterType;
 
 // 滑动条相关View
 @property (nonatomic, strong) FBSliderRelatedView *sliderRelatedView;

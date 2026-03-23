@@ -1,0 +1,96 @@
+{
+    "FBMakeupBeauty": [
+        {
+            "title": "口红",
+            "title_en": "Lipstick",
+            "name": "makeup_lipstick",
+            "idCard":0,
+            "selected": true,
+            "category": "lipstick",
+            "icon": "icon_lipstick_white_normal.webp",
+            "selectedIcon":"icon_lipstick_white_selected.webp",
+            "key":"HT_MAKEUP_LIPSTICK",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "眉毛",
+            "title_en": "Eyebrow",
+            "name": "makeup_eyebrow",
+            "idCard":1,
+            "selected": false,
+            "category": "eyebrow",
+            "icon": "icon_eyebrow_white_normal.webp",
+            "selectedIcon":"icon_eyebrow_white_selected.webp",
+            "key":"HT_MAKEUP_EYEBROW",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "腮红",
+            "title_en": "Blush",
+            "name": "makeup_blush",
+            "idCard":2,
+            "selected": false,
+            "category": "blush",
+            "icon": "icon_blusher_white_normal.webp",
+            "selectedIcon":"icon_blusher_white_selected.webp",
+            "key":"HT_MAKEUP_BLUSH",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "眼影",
+            "title_en": "Eyeshadow",
+            "name": "makeup_eyeshadow",
+            "idCard":3,
+            "selected": false,
+            "category": "eyeshadow",
+            "icon": "icon_eyeshadow_white_normal.webp",
+            "selectedIcon":"icon_eyeshadow_white_selected.webp",
+            "key":"HT_MAKEUP_EYESHADOW",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "眼线",
+            "title_en": "Eyeline",
+            "name": "makeup_eyeline",
+            "idCard":4,
+            "selected": false,
+            "category": "eyeline",
+            "icon": "icon_eyeline_white_normal.webp",
+            "selectedIcon":"icon_eyeline_white_selected.webp",
+            "key":"HT_MAKEUP_EYELINE",
+            "defaultValue":0,
+            "sliderType":2
+        },
+        {
+            "title": "睫毛",
+            "title_en": "Eyelash",
+            "name": "makeup_eyelash",
+            "idCard":5,
+            "selected": false,
+            "category": "eyelash",
+            "icon": "icon_eyelash_white_normal.webp",
+            "selectedIcon":"icon_eyelash_white_selected.webp",
+            "key":"HT_MAKEUP_EYELASH",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "美瞳",
+            "title_en": "Pupils",
+            "name": "makeup_pupils",
+            "idCard":6,
+            "selected": false,
+            "category": "pupils",
+            "icon": "icon_pupils_white_normal.webp",
+            "selectedIcon":"icon_pupils_white_selected.webp",
+            "key":"HT_MAKEUP_PUPILS",
+            "defaultValue":0,
+            "sliderType":1
+        }
+        
+    ]
+}

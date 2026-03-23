@@ -2,6 +2,8 @@
 //  FBFilterEffectView.m
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2022/7/20.
+//
 
 #import "FBFilterEffectView.h"
 #import "FBModel.h"
@@ -16,27 +18,42 @@
 @property (nonatomic, strong) FBModel *selectedModel;
 @property (nonatomic, assign) NSInteger selectedIndex;
 @property (nonatomic, strong) NSMutableArray *listArr;
-@property (nonatomic, assign) FilterType filterType;
+@property (nonatomic, assign) FBFilterType filterType;
 
 @end
 
-static NSString *const HTFilterStyleViewCellId = @"HTFilterStyleViewCellId";
-static NSString *const HTFilterHahaViewCellId = @"HTFilterHahaViewCellId";
+static NSString *const FBFilterStyleViewCellId = @"FBFilterStyleViewCellId";
+static NSString *const FBFilterHahaViewCellId = @"FBFilterHahaViewCellId";
 
 @implementation FBFilterEffectView
 
-- (instancetype)initWithFrame:(CGRect)frame listArr:(NSArray *)listArr{
-    
+// FB内部模块拆开展示，重写初始化方法
+- (instancetype)initWithFrame:(CGRect)frame listArr:(NSArray *)listArr filterType:(FBFilterType)filterType {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        self.filterType = filterType;
         self.listArr = [listArr mutableCopy];
-        //获取选中的位置
-        NSInteger index = [FBTool getFloatValueForKey:FB_STYLE_FILTER_SELECTED_POSITION];
-        FBModel *model = [[FBModel alloc] initWithDic:self.listArr[index]];
-        model.selected = YES;
-        [self.listArr replaceObjectAtIndex:index withObject:[FBTool getDictionaryWithHTModel:model]];
-        self.selectedModel = model;
-        self.selectedIndex = index;
+        
+        NSInteger index = 0;
+        if (filterType == FB_Filter_Beauty) {
+            //获取选中的位置
+            index = [FBTool getFloatValueForKey:FB_STYLE_FILTER_SELECTED_POSITION];
+            FBModel *model = [[FBModel alloc] initWithDic:self.listArr[index]];
+            model.selected = YES;
+            [self.listArr replaceObjectAtIndex:index withObject:[FBTool getDictionaryWithFBModel:model]];
+            self.selectedModel = model;
+            self.selectedIndex = index;
+            
+        }else {
+            FBModel *model = [[FBModel alloc] initWithDic:self.listArr[index]];
+            model.selected = YES;
+            NSDictionary *dic = [FBTool getDictionaryWithFBModel:model];
+            [self.listArr replaceObjectAtIndex:index withObject:dic];
+            self.selectedModel = model;
+            self.selectedIndex = index;
+        }
+        
         
         [self addSubview:self.menuCollectionView];
         [self.menuCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -47,7 +64,7 @@ static NSString *const HTFilterHahaViewCellId = @"HTFilterHahaViewCellId";
          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
              //通知主View 更新拉条
              if (self.onUpdateSliderHiddenBlock) {
-                 self.onUpdateSliderHiddenBlock(self.selectedModel,index);
+                 self.onUpdateSliderHiddenBlock(self.selectedModel, index);
              }
              
              // 初始化默认选择效果
@@ -58,6 +75,40 @@ static NSString *const HTFilterHahaViewCellId = @"HTFilterHahaViewCellId";
     }
     return self;
 }
+
+//- (instancetype)initWithFrame:(CGRect)frame listArr:(NSArray *)listArr{
+//    
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        self.listArr = [listArr mutableCopy];
+//        //获取选中的位置
+//        NSInteger index = [FBTool getFloatValueForKey:FB_STYLE_FILTER_SELECTED_POSITION];
+//        FBModel *model = [[FBModel alloc] initWithDic:self.listArr[index]];
+//        model.selected = YES;
+//        [self.listArr replaceObjectAtIndex:index withObject:[FBTool getDictionaryWithFBModel:model]];
+//        self.selectedModel = model;
+//        self.selectedIndex = index;
+//        
+//        [self addSubview:self.menuCollectionView];
+//        [self.menuCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.top.right.bottom.height.equalTo(self);
+//        }];
+//        
+//        //在主线程延迟执行
+//         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//             //通知主View 更新拉条
+//             if (self.onUpdateSliderHiddenBlock) {
+//                 self.onUpdateSliderHiddenBlock(self.selectedModel,index);
+//             }
+//             
+//             // 初始化默认选择效果
+////             NSInteger index = [FBTool getFloatValueForKey:FB_STYLE_FILTER_SELECTED_POSITION];
+//             [self collectionView:self.menuCollectionView didSelectItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+//           });
+//        
+//    }
+//    return self;
+//}
 
 
 
@@ -83,9 +134,9 @@ static NSString *const HTFilterHahaViewCellId = @"HTFilterHahaViewCellId";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    if(self.filterType == ht_haha_filter){
+    if(self.filterType == FB_Filter_Funny){
 
-        FBFilterHahaViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HTFilterHahaViewCellId forIndexPath:indexPath];
+        FBFilterHahaViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:FBFilterHahaViewCellId forIndexPath:indexPath];
 
         FBModel *indexModel = [[FBModel alloc] initWithDic:self.listArr[indexPath.row]];
 
@@ -96,7 +147,7 @@ static NSString *const HTFilterHahaViewCellId = @"HTFilterHahaViewCellId";
 
     }else{
         
-        FBFilterStyleViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HTFilterStyleViewCellId forIndexPath:indexPath];
+        FBFilterStyleViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:FBFilterStyleViewCellId forIndexPath:indexPath];
         FBModel *indexModel = [[FBModel alloc] initWithDic:self.listArr[indexPath.row]];
         
         [cell setModel:indexModel isWhite:self.isThemeWhite];
@@ -113,7 +164,7 @@ static NSString *const HTFilterHahaViewCellId = @"HTFilterHahaViewCellId";
     }
     
     // 风格滤镜与妆容推荐互斥
-    if(self.filterType == ht_style_filter && [FBTool getFloatValueForKey:FB_LIGHT_MAKEUP_SELECTED_POSITION] > 0){
+    if(self.filterType == FB_Filter_Beauty && [FBTool getFloatValueForKey:FB_LIGHT_MAKEUP_SELECTED_POSITION] > 0){
         if (_filterTipBlock) {
             _filterTipBlock();
         }
@@ -121,27 +172,27 @@ static NSString *const HTFilterHahaViewCellId = @"HTFilterHahaViewCellId";
     }
     
     indexModel.selected = true;
-    [self.listArr replaceObjectAtIndex:indexPath.row withObject:[FBTool getDictionaryWithHTModel:indexModel]];
+    [self.listArr replaceObjectAtIndex:indexPath.row withObject:[FBTool getDictionaryWithFBModel:indexModel]];
     self.selectedModel.selected = false;
  
-    [self.listArr replaceObjectAtIndex:self.selectedIndex withObject:[FBTool getDictionaryWithHTModel:self.selectedModel]];
+    [self.listArr replaceObjectAtIndex:self.selectedIndex withObject:[FBTool getDictionaryWithFBModel:self.selectedModel]];
     [collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.selectedIndex inSection:0],indexPath]];
     self.selectedModel = indexModel;
     self.selectedIndex = indexPath.row;
     
 
     switch (self.filterType) {
-        case ht_style_filter:
+        case FB_Filter_Beauty:
             //保存滤镜的选中位置
             [FBTool setObject:self.selectedModel.name forKey:FB_STYLE_FILTER_NAME];
             [FBTool setFloatValue:indexPath.row forKey:FB_STYLE_FILTER_SELECTED_POSITION];
-            [[FaceBeauty shareInstance] setFilter:FBFilterBeauty name:self.selectedModel.name];
+            [[FaceBeauty shareInstance] setFilter:FBFilterBeauty name:self.selectedModel.name value:[FBTool getFloatValueForKey:indexModel.key]];
             break;
-        case ht_effect_filter:
+        case FB_Filter_Effect:
             [FBTool setFloatValue:indexPath.row forKey:FB_EFFECT_FILTER_SELECTED_POSITION];
             [[FaceBeauty shareInstance] setFilter:FBFilterEffect name:self.selectedModel.name];
             break;
-        case ht_haha_filter:
+        case FB_Filter_Funny:
             [FBTool setFloatValue:indexPath.row forKey:FB_HAHA_FILTER_SELECTED_POSITION];
             [[FaceBeauty shareInstance] setFilter:FBFilterFunny name:self.selectedModel.name];
             break;
@@ -153,7 +204,7 @@ static NSString *const HTFilterHahaViewCellId = @"HTFilterHahaViewCellId";
     
     //通知主View 更新拉条
     if (self.onUpdateSliderHiddenBlock) {
-        self.onUpdateSliderHiddenBlock(self.selectedModel,indexPath.row);
+        self.onUpdateSliderHiddenBlock(self.selectedModel, indexPath.row);
     }
     
 }
@@ -185,13 +236,13 @@ static NSString *const HTFilterHahaViewCellId = @"HTFilterHahaViewCellId";
 //    NSInteger selectedIndex = 0;
     
     switch (self.filterType) {
-        case ht_style_filter:
+        case FB_Filter_Beauty:
             self.selectedIndex = [FBTool getFloatValueForKey:FB_STYLE_FILTER_SELECTED_POSITION];
             break;
-        case ht_effect_filter:
+        case FB_Filter_Effect:
             self.selectedIndex = [FBTool getFloatValueForKey:FB_EFFECT_FILTER_SELECTED_POSITION];
             break;
-        case ht_haha_filter:
+        case FB_Filter_Funny:
             self.selectedIndex = [FBTool getFloatValueForKey:FB_HAHA_FILTER_SELECTED_POSITION];
             break;
             
@@ -204,13 +255,13 @@ static NSString *const HTFilterHahaViewCellId = @"HTFilterHahaViewCellId";
         self.selectedModel = [[FBModel alloc] initWithDic:self.listArr[self.selectedIndex]];
         self.selectedModel.selected = YES;
 //        int lastSelectIndex = [self getIndexForTitle:self.selectedModel.name withArray:self.listArr];
-        [self.listArr replaceObjectAtIndex:self.selectedIndex withObject:[FBTool getDictionaryWithHTModel:self.selectedModel]];
+        [self.listArr replaceObjectAtIndex:self.selectedIndex withObject:[FBTool getDictionaryWithFBModel:self.selectedModel]];
 //    }else{
 //        self.selectedModel = [[FBModel alloc] init];
 //    }
     //通知主View 更新拉条
     if (self.onUpdateSliderHiddenBlock) {
-        self.onUpdateSliderHiddenBlock(self.selectedModel,self.selectedIndex);
+        self.onUpdateSliderHiddenBlock(self.selectedModel, self.selectedIndex);
     }
     [self.menuCollectionView reloadData];
     
@@ -227,8 +278,8 @@ static NSString *const HTFilterHahaViewCellId = @"HTFilterHahaViewCellId";
         _menuCollectionView.backgroundColor = [UIColor clearColor];
         _menuCollectionView.dataSource= self;
         _menuCollectionView.delegate = self;
-        [_menuCollectionView registerClass:[FBFilterStyleViewCell class] forCellWithReuseIdentifier:HTFilterStyleViewCellId];
-        [_menuCollectionView registerClass:[FBFilterHahaViewCell class] forCellWithReuseIdentifier:HTFilterHahaViewCellId];
+        [_menuCollectionView registerClass:[FBFilterStyleViewCell class] forCellWithReuseIdentifier:FBFilterStyleViewCellId];
+        [_menuCollectionView registerClass:[FBFilterHahaViewCell class] forCellWithReuseIdentifier:FBFilterHahaViewCellId];
     }
     return _menuCollectionView;
 }

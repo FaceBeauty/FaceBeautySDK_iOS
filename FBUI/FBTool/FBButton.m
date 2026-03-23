@@ -2,27 +2,29 @@
 //  FBButton.m
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2022/7/18.
+//
 
 #import "FBButton.h"
 #import "FBUIConfig.h"
 
 @interface FBButton()
 
-@property (strong, nonatomic) UIImageView *fbImgView;
+@property (strong, nonatomic) UIImageView *htImgView;
 @property (strong, nonatomic) UILabel *label;
 
 @end
 
 @implementation FBButton
 
-- (UIImageView *)fbImgView{
-    if (!_fbImgView) {
-        _fbImgView = [[UIImageView alloc] init];
-        _fbImgView.contentMode = UIViewContentModeScaleAspectFill;
-        _fbImgView.clipsToBounds = YES;
-        _fbImgView.userInteractionEnabled = NO;
+- (UIImageView *)htImgView{
+    if (!_htImgView) {
+        _htImgView = [[UIImageView alloc] init];
+        _htImgView.contentMode = UIViewContentModeScaleAspectFill;
+        _htImgView.clipsToBounds = YES;
+        _htImgView.userInteractionEnabled = NO;
     }
-    return _fbImgView;
+    return _htImgView;
 }
 
 - (UILabel *)label{
@@ -40,7 +42,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        [self addSubview:self.fbImgView];
+        [self addSubview:self.htImgView];
         [self addSubview:self.label];
         [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.left.right.equalTo(self);
@@ -51,7 +53,7 @@
 
 - (void)setImageWidthAndHeight:(CGFloat)square title:(NSString *)title{
     self.label.text = title;
-    [self.fbImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.htImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.centerX.equalTo(self);
         make.width.height.mas_equalTo(square);
     }];
@@ -59,13 +61,13 @@
 
 - (void)setImage:(UIImage *)image {
     
-    self.fbImgView.image = image;
+    self.htImgView.image = image;
 }
 
 - (void)setImage:(UIImage *)image imageWidth:(CGFloat)width title:(NSString *)title{
     self.label.text = title;
-    self.fbImgView.image = image;
-    [self.fbImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.htImgView.image = image;
+    [self.htImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.centerX.equalTo(self);
         make.width.height.mas_equalTo(width);
     }];
@@ -80,8 +82,8 @@
 }
 
 - (void)setImageCornerRadius:(CGFloat)radius{
-    [self.fbImgView.layer setMasksToBounds:YES];
-    [self.fbImgView.layer setCornerRadius:radius];
+    [self.htImgView.layer setMasksToBounds:YES];
+    [self.htImgView.layer setCornerRadius:radius];
 }
 
 - (void)setTextBackgroundColor:(UIColor *)color{

@@ -2,6 +2,8 @@
 //  FBFilterStyleViewCell.m
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2022/7/20.
+//
 
 #import "FBFilterStyleViewCell.h"
 #import "FBUIConfig.h"
@@ -36,7 +38,7 @@
 - (UIImageView *)lineView{
     if (!_lineView) {
         _lineView = [[UIImageView alloc] init];
-        _lineView.image = [UIImage imageNamed:@"ht_line.png"];
+        _lineView.image = [UIImage imageNamed:@"fb_line.png"];
     }
     return _lineView;
 }

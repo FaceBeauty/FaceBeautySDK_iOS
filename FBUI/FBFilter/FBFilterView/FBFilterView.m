@@ -8,13 +8,12 @@
 #import "FBFilterView.h"
 #import "FBFilterMenuView.h"
 #import "FBFilterEffectView.h"
-#import "FBUIConfig.h"
 #import "FBTool.h"
 
 @interface FBFilterView ()
 
    
-
+@property (nonatomic, assign) FBFilterType filterType;
 // 美颜部分全部数据
 @property (nonatomic, strong) NSArray *listArr;
 
@@ -34,25 +33,74 @@
 
 @implementation FBFilterView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+// FB内部模块拆开展示，重写初始化方法
+- (instancetype)initWithFrame:(CGRect)frame filterType:(FBFilterType)filterType {
+    self = [super initWithFrame:frame];
+        if (self) {
+            _filterType = filterType;
+            _menuIndex = filterType;
+            
+            [self addSubview:self.sliderRelatedView];
+            [self.sliderRelatedView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.top.equalTo(self);
+                make.height.mas_equalTo(kSliderViewHeight);
+            }];
+            [self addSubview:self.containerView];
+            [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.bottom.equalTo(self);
+                make.height.mas_equalTo(kContainerHeightFilter+kSafeAreaBottom);
+            }];
+            [self.containerView addSubview:self.menuView];
+            [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.left.right.equalTo(self.containerView);
+//                make.height.mas_equalTo(kMenuViewHeight);
+                make.height.mas_equalTo(0);
+            }];
+            [self.containerView addSubview:self.lineView];
+            [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(self.containerView);
+                make.top.equalTo(self.menuView.mas_bottom);
+                make.height.mas_equalTo(0.5);
+            }];
+            self.menuView.hidden = YES;
+            self.lineView.hidden = YES;
+            
+            [self.containerView addSubview:self.effectView];
+            [self.effectView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.top.equalTo(self.lineView.mas_bottom).offset(FBHeight(23));
+                make.top.equalTo(self.lineView.mas_bottom).offset(FBHeight(20));
+                make.left.right.equalTo(self.containerView);
+                make.height.mas_equalTo(FBHeight(82));
+            }];
+            
+            [self addSubview:self.confirmLabel];
+            [self.confirmLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(self);
+                make.top.equalTo(self).offset(-kMarginBetweenToastAndFunctionView);
+            }];
+        }
+        return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    
     self = [super initWithFrame:frame];
     
     if (self) {
         [self addSubview:self.sliderRelatedView];
         [self.sliderRelatedView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.equalTo(self);
-            make.height.mas_equalTo(FBHeight(53));
+            make.height.mas_equalTo(kSliderViewHeight);
         }];
         [self addSubview:self.containerView];
         [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(self);
-            make.height.mas_equalTo(FBHeight(258));
+            make.height.mas_equalTo(kContainerHeightFilter+kSafeAreaBottom);
         }];
         [self.containerView addSubview:self.menuView];
         [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.equalTo(self.containerView);
-            make.height.mas_equalTo(FBHeight(45));
+            make.height.mas_equalTo(kMenuViewHeight);
         }];
         [self.containerView addSubview:self.lineView];
         [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -71,7 +119,7 @@
         [self addSubview:self.confirmLabel];
         [self.confirmLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self);
-            make.top.equalTo(self).offset(-FBHeight(40));
+            make.top.equalTo(self).offset(-kMarginBetweenToastAndFunctionView);
         }];
     }
     return self;
@@ -112,21 +160,65 @@
 }
 
 #pragma mark - 懒加载
-- (NSArray *)listArr{ 
-    _listArr = @[
-        @{
-            @"name":[FBTool isCurrentLanguageChinese] ? @"风格滤镜" : @"Style",
-            @"classify":[FBTool jsonModeForPath:[[[FaceBeauty shareInstance] getFilterPath] stringByAppendingFormat:@"fb_style_filter_config.json"] withKey:@"fb_style_filter"]
+// FB内部模块拆开展示，重写初始化方法
+- (NSArray *)listArr {
+    if (!_listArr) {
+        NSString *filterBasePath = [[FaceBeauty shareInstance] getFilterPath];
+        NSDictionary *targetItem = nil;
+        
+        // 根据初始化时传入的 targetListType 生成对应项
+        switch (self.filterType) {
+            case FB_Filter_Beauty:
+                targetItem = @{
+                    @"name": [FBTool isCurrentLanguageChinese] ? @"风格滤镜" : @"Style",
+                    @"classify": [FBTool jsonModeForPath:[filterBasePath stringByAppendingString:@"style_filter_config.json"] withKey:@"style_filter"]
+                };
+                break;
+            case FB_Filter_Effect:
+                targetItem = @{
+                    @"name": [FBTool isCurrentLanguageChinese] ? @"特效滤镜" : @"Special",
+                    @"classify": [FBTool jsonModeForPath:[filterBasePath stringByAppendingString:@"effect_filter_config.json"] withKey:@"effect_filter"]
+                };
+                break;
+            case FB_Filter_Funny:
+                targetItem = @{
+                    @"name": [FBTool isCurrentLanguageChinese] ? @"哈哈镜" : @"Funny",
+                    @"classify": [FBTool jsonModeForPath:[filterBasePath stringByAppendingString:@"funny_filter_config.json"] withKey:@"funny_filter"]
+                };
+                break;
+            default:
+                targetItem = @{@"name": @"", @"classify": @{}};
+                break;
         }
-      ];
+        
+        _listArr = @[targetItem]; // 生成仅包含对应项的数组
+    }
     return _listArr;
 }
+
+//- (NSArray *)listArr{
+//    _listArr = @[
+//        @{
+//            @"name":[FBTool isCurrentLanguageChinese] ? @"风格滤镜" : @"Style",
+//            @"classify":[FBTool jsonModeForPath:[[[FaceBeauty shareInstance] getFilterPath] stringByAppendingFormat:@"style_filter_config.json"] withKey:@"style_filter"]
+//        },
+//        @{
+//            @"name":[FBTool isCurrentLanguageChinese] ? @"特效滤镜" : @"Special",
+//            @"classify":[FBTool jsonModeForPath:[[[FaceBeauty shareInstance] getFilterPath] stringByAppendingFormat:@"effect_filter_config.json"] withKey:@"effect_filter"]
+//        },
+//        @{
+//            @"name":[FBTool isCurrentLanguageChinese] ? @"哈哈镜" : @"Funny",
+//            @"classify":[FBTool jsonModeForPath:[[[FaceBeauty shareInstance] getFilterPath] stringByAppendingFormat:@"funny_filter_config.json"] withKey:@"funny_filter"]
+//        }
+//      ];
+//    return _listArr;
+//}
 
 # pragma mark - 懒加载
 - (FBSliderRelatedView *)sliderRelatedView{
     if (!_sliderRelatedView) {
         _sliderRelatedView = [[FBSliderRelatedView alloc] initWithFrame:CGRectZero];
-        [_sliderRelatedView.sliderView setSliderType:HTSliderTypeI WithValue:[FBTool getFloatValueForKey:FB_STYLE_FILTER_SLIDER]];
+        [_sliderRelatedView.sliderView setSliderType:FBSliderTypeI WithValue:[FBTool getFloatValueForKey:FB_STYLE_FILTER_SLIDER]];
         WeakSelf;
         // 更新效果
         [_sliderRelatedView.sliderView setRefreshValueBlock:^(CGFloat value) {
@@ -138,6 +230,7 @@
             
             switch (weakSelf.menuIndex) {
                 case 0://风格
+                    
                     [FBTool setFloatValue:value forKey:FB_STYLE_FILTER_SLIDER];
                     break;
                 case 1://特效
@@ -175,6 +268,11 @@
             //刷新effect数据
             [weakSelf.effectView updateFilterListData:dic];
         }];
+//        [_menuView setArItemMenuOnClickBlock:^(NSArray * _Nonnull array, NSInteger index, NSInteger selectedIndex) {
+//            NSDictionary *dic = @{@"data":array,@"type":@(index),@"selected":@(selectedIndex)};
+//            //刷新effect数据
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationName_FBARItemEffectView_UpDateListArray" object:dic];
+//        }];
     }
     return _menuView;
 }
@@ -189,7 +287,7 @@
 - (FBFilterEffectView *)effectView{
     if (!_effectView) {
         NSDictionary *dic = self.listArr.firstObject;
-        _effectView = [[FBFilterEffectView alloc] initWithFrame:CGRectZero listArr:dic[@"classify"]];
+        _effectView = [[FBFilterEffectView alloc] initWithFrame:CGRectZero listArr:dic[@"classify"] filterType:self.filterType];
         WeakSelf;
         [_effectView setOnUpdateSliderHiddenBlock:^(FBModel * _Nonnull model,NSInteger index) {
             weakSelf.currentModel = model;

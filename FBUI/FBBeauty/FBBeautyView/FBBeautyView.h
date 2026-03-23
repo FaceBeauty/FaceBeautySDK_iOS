@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isHide;
 
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,0 +1,123 @@
+{
+    "fb_hair": [
+        {
+            "title": "原图",
+            "title_en": "Original",
+            "idCard": 0,
+            "selected": false,
+            "icon":"icon_ranfa_yuantu",
+            "key":"HT_HAIR_SLIDER0",
+            "defaultValue":0
+        },
+        {
+            "title": "神秘紫",
+            "title_en": "Purple",
+            "idCard": 1,
+            "selected": false,
+            "icon":"icon_ranfa_shenmizi",
+            "key":"HT_HAIR_SLIDER1",
+            "defaultValue":50
+        },
+        {
+            "title": "巧克力",
+            "title_en": "Chocolate",
+            "idCard": 2,
+            "selected": false,
+            "icon":"icon_ranfa_qiaokeli",
+            "key":"HT_HAIR_SLIDER2",
+            "defaultValue":50
+        },
+        {
+            "title": "青木棕",
+            "title_en": "Brown1",
+            "idCard": 3,
+            "selected": false,
+            "icon":"icon_ranfa_qingmuzong",
+            "key":"HT_HAIR_SLIDER3",
+            "defaultValue":50
+        },
+        {
+            "title": "焦糖棕",
+            "title_en": "Brown2",
+            "idCard": 4,
+            "selected": false,
+            "icon":"icon_ranfa_jiaotangzong",
+            "key":"HT_HAIR_SLIDER4",
+            "defaultValue":50
+        },
+        {
+            "title": "落日橘",
+            "title_en": "Orange1",
+            "idCard": 5,
+            "selected": false,
+            "icon":"icon_ranfa_luoriju",
+            "key":"HT_HAIR_SLIDER5",
+            "defaultValue":50
+        },
+        {
+            "title": "复古玫瑰",
+            "title_en": "Rose1",
+            "idCard": 6,
+            "selected": false,
+            "icon":"icon_ranfa_fugumeigui",
+            "key":"HT_HAIR_SLIDER6",
+            "defaultValue":50
+        },
+        {
+            "title": "深玫瑰",
+            "title_en": "Rose2",
+            "idCard": 7,
+            "selected": false,
+            "icon":"icon_ranfa_shenmeigui",
+            "key":"HT_HAIR_SLIDER7",
+            "defaultValue":50
+        },
+        {
+            "title": "雾霾香芋",
+            "title_en": "Rose5",
+            "idCard": 8,
+            "selected": false,
+            "icon":"icon_ranfa_wumaixiangyu",
+            "key":"HT_HAIR_SLIDER8",
+            "defaultValue":50
+        },
+        {
+            "title": "孔雀蓝",
+            "title_en": "Blue",
+            "idCard": 9,
+            "selected": false,
+            "icon":"icon_ranfa_kongquelan",
+            "key":"HT_HAIR_SLIDER9",
+            "defaultValue":50
+        },
+        {
+            "title": "雾霾蓝灰",
+            "title_en": "Gray1",
+            "idCard": 10,
+            "selected": false,
+            "icon":"icon_ranfa_wumailanhui",
+            "key":"HT_HAIR_SLIDER10",
+            "defaultValue":50
+        },
+        {
+            "title": "亚麻灰棕",
+            "title_en": "Gray2",
+            "idCard": 11,
+            "selected": false,
+            "icon":"icon_ranfa_yamahuizong",
+            "key":"HT_HAIR_SLIDER11",
+            "defaultValue":50
+        },
+        {
+            "title": "亚麻浅灰",
+            "title_en": "Gray3",
+            "idCard": 12,
+            "selected": false,
+            "icon":"icon_ranfa_yamaqianhui",
+            "key":"HT_HAIR_SLIDER12",
+            "defaultValue":50
+        }
+        
+    ]
+    
+}

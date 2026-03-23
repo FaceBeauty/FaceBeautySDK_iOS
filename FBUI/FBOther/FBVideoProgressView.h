@@ -2,6 +2,8 @@
 //  FBVideoProgressView.h
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2023/3/30.
+//
 
 #import <UIKit/UIKit.h>
 

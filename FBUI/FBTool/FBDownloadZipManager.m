@@ -2,6 +2,8 @@
 //  FBDownloadZipManager.m
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2022/7/18.
+//
 
 #import "FBDownloadZipManager.h"
 #import <SSZipArchive/SSZipArchive.h>
@@ -48,33 +50,33 @@ static FBDownloadZipManager *shareManager = NULL;
     NSString *cachePaths = @"";
     
     switch (type) {
-        case HT_DOWNLOAD_TYPE_Sticker:// 贴纸
+        case FB_DOWNLOAD_TYPE_Sticker:// 贴纸
             downloadURL = [[[FaceBeauty shareInstance] getARItemUrlBy:FBItemSticker] stringByAppendingFormat:@"%@.zip",model.name];
             cachePaths =  [[FaceBeauty shareInstance] getARItemPathBy:FBItemSticker];
             break;
-        case HT_DOWNLOAD_TYPE_Mask:// 面具
+        case FB_DOWNLOAD_TYPE_Mask:// 面具
             downloadURL = [[[FaceBeauty shareInstance] getARItemUrlBy:FBItemMask] stringByAppendingFormat:@"%@.zip",model.name];
             cachePaths =  [[FaceBeauty shareInstance] getARItemPathBy:FBItemMask];
             break;
-        case HT_DOWNLOAD_TYPE_Gift:// 礼物
+        case FB_DOWNLOAD_TYPE_Gift:// 礼物
             downloadURL = [[[FaceBeauty shareInstance] getARItemUrlBy:FBItemGift] stringByAppendingFormat:@"%@.zip",model.name];
             cachePaths =  [[FaceBeauty shareInstance] getARItemPathBy:FBItemGift];
             break;
             
-        case HT_DOWNLOAD_STATE_Greenscreen:// 绿幕抠图
+        case FB_DOWNLOAD_STATE_Greenscreen:// 绿幕抠图
             downloadURL = [[FaceBeauty shareInstance].getChromaKeyingUrl stringByAppendingFormat:@"%@.zip",model.name];
             cachePaths =  [FaceBeauty shareInstance].getChromaKeyingPath;
             break;
-        case HT_DOWNLOAD_STATE_Portraits:// 人像分割
+        case FB_DOWNLOAD_STATE_Portraits:// 人像分割
             downloadURL = [[FaceBeauty shareInstance].getAISegEffectUrl stringByAppendingFormat:@"%@.zip",model.name];
             cachePaths =  [FaceBeauty shareInstance].getAISegEffectPath;
             break;
-        case HT_DOWNLOAD_STATE_Gesture:// 手势
+        case FB_DOWNLOAD_STATE_Gesture:// 手势
             downloadURL = [[FaceBeauty shareInstance].getGestureEffectUrl stringByAppendingFormat:@"%@.zip",model.name];
             cachePaths =  [FaceBeauty shareInstance].getGestureEffectPath;
             break;
             
-        case HT_DOWNLOAD_TYPE_MAKEUP:// 美妆
+        case FB_DOWNLOAD_TYPE_MAKEUP:// 美妆
             downloadURL = [[FaceBeauty shareInstance].getMakeupUrl stringByAppendingFormat:@"%@/%@.zip", model.category, model.name];
             cachePaths =  [[FaceBeauty shareInstance].getMakeupPath stringByAppendingFormat:@"%@/", model.category];
 //            NSLog(@"////////     %@ ==== %@", downloadURL, cachePaths);

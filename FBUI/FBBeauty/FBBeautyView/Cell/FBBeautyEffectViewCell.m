@@ -2,6 +2,8 @@
 //  FBBeautyEffectViewCell.m
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2022/7/19.
+//
 
 #import "FBBeautyEffectViewCell.h"
 #import "FBUIConfig.h"
@@ -48,7 +50,7 @@
 
 #pragma mark - 美颜美型赋值
 - (void)setSkinShapeModel:(FBModel *)model themeWhite:(BOOL)white {
-    
+
     if (model.selected) {
         [self.item setImage:[UIImage imageNamed:white ? [NSString stringWithFormat:@"34_%@", model.selectedIcon] : model.selectedIcon] imageWidth:FBWidth(48) title:[FBTool isCurrentLanguageChinese] ? model.title : model.title_en];
         [self.item setTextColor:MAIN_COLOR];
@@ -57,11 +59,20 @@
         [self.item setTextColor:white ? [UIColor blackColor] : FBColors(255, 1.0)];
     }
     [self.item setTextFont:FBFontRegular(12)];
-    
-    if([FBTool getFloatValueForKey:model.key] == 0) {
-        [self.pointView setHidden:YES];
-    }else{
-        [self.pointView setHidden:NO];
+
+    // 脸型：点只根据selected状态显示（互斥选择）
+    // 美肤/美型：点根据缓存值显示（参数被修改过）
+    if ([model.key hasPrefix:@"FACE_SHAPE_"]) {
+        // 脸型：只有选中的才显示点
+        BOOL shouldHide = !model.selected;
+        [self.pointView setHidden:shouldHide];
+    } else {
+        // 美肤/美型：缓存值为0时隐藏点
+        if([FBTool getFloatValueForKey:model.key] == 0) {
+            [self.pointView setHidden:YES];
+        }else{
+            [self.pointView setHidden:NO];
+        }
     }
 }
 

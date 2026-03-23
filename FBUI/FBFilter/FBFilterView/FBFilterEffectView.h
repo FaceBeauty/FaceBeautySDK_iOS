@@ -2,7 +2,8 @@
 //  FBFilterEffectView.h
 //  FaceBeautyDemo
 //
-
+//  Created by Texeljoy Tech on 2022/7/20.
+//
 
 #import <UIKit/UIKit.h>
 #import "FBUIConfig.h"
@@ -14,15 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
  
  */
 
-typedef NS_ENUM(NSInteger, FilterType) {
-    ht_style_filter = 0, // 风格滤镜
-    ht_effect_filter, // 特效滤镜
-    ht_haha_filter, // 哈哈镜
-};
-
 @interface FBFilterEffectView : UIView
 
 @property (nonatomic, copy) void (^onUpdateSliderHiddenBlock)(FBModel *model,NSInteger index);
+// FB内部模块拆开展示，重写初始化方法
+- (instancetype)initWithFrame:(CGRect)frame listArr:(NSArray *)listArr filterType:(FBFilterType)filterType;
 
 - (instancetype)initWithFrame:(CGRect)frame listArr:(NSArray *)listArr;
 

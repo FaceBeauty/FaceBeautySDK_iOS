@@ -1,36 +1,14 @@
 {
     "FBFaceBeauty": [
         {
-            "title": "大眼",
-            "title_en": "Big eye",
-            "idCard":10,
-            "selected": true,
-            "icon": "eyeEnlarging.png",
-            "selectedIcon":"eyeEnlarging_selected.png",
-            "key":"FB_FACE_EYEENLARGING_SLIDER",
-            "defaultValue":60,
-            "sliderType":1
-        },
-        {
-            "title": "圆眼",
-            "title_en": "Round eyes",
-            "idCard":11,
-            "selected": false,
-            "icon": "roundEye.png",
-            "selectedIcon":"roundEye_selected.png",
-            "key":"FB_FACE_ROUNDEYE_SLIDER",
-            "defaultValue":0,
-            "sliderType":1
-        },
-        {
             "title": "瘦脸",
             "title_en": "Thin face",
             "idCard":20,
-            "selected": false,
+            "selected": true,
             "icon": "cheekThinning.png",
             "selectedIcon":"cheekThinning_selected.png",
-            "key":"FB_FACE_CHEEKTHINNING_SLIDER",
-            "defaultValue":30,
+            "key":"HT_FACE_CHEEKTHINNING_SLIDER",
+            "defaultValue":0,
             "sliderType":1
         },
         {
@@ -40,7 +18,7 @@
             "selected": false,
             "icon": "vCheek.png",
             "selectedIcon":"vCheek_selected.png",
-            "key":"FB_FACE_VCHEEK_SLIDER",
+            "key":"HT_FACE_VCHEEK_SLIDER",
             "defaultValue":50,
             "sliderType":1
         },
@@ -51,62 +29,7 @@
             "selected": false,
             "icon": "cheekNarrowing.png",
             "selectedIcon":"cheekNarrowing_selected.png",
-            "key":"FB_FACE_CHEEKNARROWING_SLIDER",
-            "defaultValue":0,
-            "sliderType":1
-        },
-        {
-            "title": "瘦颧骨",
-            "title_en": "Cheekbones",
-            "idCard":23,
-            "selected": false,
-            "icon": "cheekboneThinning.png",
-            "selectedIcon":"cheekboneThinning_selected.png",
-            "key":"FB_FACE_CHEEKBONETHINNING_SLIDER",
-            "defaultValue":0,
-            "sliderType":1
-        },
-        {
-            "title": "瘦下颌骨",
-            "title_en": "Lower jaw",
-            "idCard":24,
-            "selected": false,
-            "icon": "jawboneThinning.png",
-            "selectedIcon":"jawboneThinning_selected.png",
-            "key":"FB_FACE_JAWBONETHINNING_SLIDER",
-            "defaultValue":0,
-            "sliderType":1
-        },
-        {
-            "title": "丰太阳穴",
-            "title_en": "Temple",
-            "idCard":25,
-            "selected": false,
-            "icon": "temple.png",
-            "selectedIcon":"temple_selected.png",
-            "key":"FB_FACE_TEMPLE_SLIDER",
-            "defaultValue":50,
-            "sliderType":1
-        },
-        {
-            "title": "小头",
-            "title_en": "Small head",
-            "idCard":26,
-            "selected": false,
-            "icon": "headSmaller.png",
-            "selectedIcon":"headSmaller_selected.png",
-            "key":"FB_FACE_HEADSMALLER_SLIDER",
-            "defaultValue":0,
-            "sliderType":1
-        },
-        {
-            "title": "小脸",
-            "title_en": "Small face",
-            "idCard":27,
-            "selected": false,
-            "icon": "faceLessening.png",
-            "selectedIcon":"faceLessening_selected.png",
-            "key":"FB_FACE_FACELESSENING_SLIDER",
+            "key":"HT_FACE_CHEEKNARROWING_SLIDER",
             "defaultValue":0,
             "sliderType":1
         },
@@ -117,7 +40,62 @@
             "selected": false,
             "icon": "faceShorter.png",
             "selectedIcon":"faceShorter_selected.png",
-            "key":"FB_FACE_FACESHORTER_SLIDER",
+            "key":"HT_FACE_FACESHORTER_SLIDER",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "小脸",
+            "title_en": "Small face",
+            "idCard":27,
+            "selected": false,
+            "icon": "faceLessening.png",
+            "selectedIcon":"faceLessening_selected.png",
+            "key":"HT_FACE_FACELESSENING_SLIDER",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "瘦颧骨",
+            "title_en": "Cheekbones",
+            "idCard":23,
+            "selected": false,
+            "icon": "cheekboneThinning.png",
+            "selectedIcon":"cheekboneThinning_selected.png",
+            "key":"HT_FACE_CHEEKBONETHINNING_SLIDER",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "瘦下颌骨",
+            "title_en": "Lower jaw",
+            "idCard":24,
+            "selected": false,
+            "icon": "jawboneThinning.png",
+            "selectedIcon":"jawboneThinning_selected.png",
+            "key":"HT_FACE_JAWBONETHINNING_SLIDER",
+            "defaultValue":10,
+            "sliderType":1
+        },
+        {
+            "title": "大眼",
+            "title_en": "Big eye",
+            "idCard":10,
+            "selected": false,
+            "icon": "eyeEnlarging.png",
+            "selectedIcon":"eyeEnlarging_selected.png",
+            "key":"HT_FACE_EYEENLARGING_SLIDER",
+            "defaultValue":40,
+            "sliderType":1
+        },
+        {
+            "title": "圆眼",
+            "title_en": "Round eyes",
+            "idCard":11,
+            "selected": false,
+            "icon": "roundEye.png",
+            "selectedIcon":"roundEye_selected.png",
+            "key":"HT_FACE_ROUNDEYE_SLIDER",
             "defaultValue":0,
             "sliderType":1
         },
@@ -128,73 +106,7 @@
             "selected": false,
             "icon": "chinTrimming.png",
             "selectedIcon":"chinTrimming_selected.png",
-            "key":"FB_FACE_CHINTRIMMING_SLIDER",
-            "defaultValue":0,
-            "sliderType":2
-        },
-        {
-            "title": "缩人中",
-            "title_en": "Shrink in",
-            "idCard":2,
-            "selected": false,
-            "icon": "philtrumTrimming.png",
-            "selectedIcon":"philtrumTrimming_selected.png",
-            "key":"FB_FACE_PHILTRUHTRIMMING_SLIDER",
-            "defaultValue":0,
-            "sliderType":2
-        },
-        {
-            "title": "发际线",
-            "title_en": "Hairline",
-            "idCard":1,
-            "selected": false,
-            "icon": "forehead.png",
-            "selectedIcon":"forehead_selected.png",
-            "key":"FB_FACE_FOREHEAD_SLIDER",
-            "defaultValue":0,
-            "sliderType":2
-        },
-        {
-            "title": "眼间距",
-            "title_en": "Eye spacing",
-            "idCard":12,
-            "selected": false,
-            "icon": "eyeSpacingTrimming.png",
-            "selectedIcon":"eyeSpacingTrimming_selected.png",
-            "key":"FB_FACE_EYESPACINGTRIMMING_SLIDER",
-            "defaultValue":0,
-            "sliderType":2
-        },
-        {
-            "title": "眼睛角度",
-            "title_en": "Eye corner",
-            "idCard":13,
-            "selected": false,
-            "icon": "eyeAngle.png",
-            "selectedIcon":"eyeAngle_selected.png",
-            "key":"FB_FACE_EYEANGLE_SLIDER",
-            "defaultValue":0,
-            "sliderType":2
-        },
-        {
-            "title": "开眼角",
-            "title_en": "Canthus",
-            "idCard":14,
-            "selected": false,
-            "icon": "eyeCornerEnlarging.png",
-            "selectedIcon":"eyeCornerEnlarging_selected.png",
-            "key":"FB_FACE_EYECORNERENLARGING_SLIDER",
-            "defaultValue":0,
-            "sliderType":1
-        },
-        {
-            "title": "长鼻",
-            "title_en": "Long nose",
-            "idCard":30,
-            "selected": false,
-            "icon": "noseEnlarging.png",
-            "selectedIcon":"noseEnlarging_selected.png",
-            "key":"FB_FACE_NOSEENLARGING_SLIDER",
+            "key":"HT_FACE_CHINTRIMMING_SLIDER",
             "defaultValue":0,
             "sliderType":2
         },
@@ -205,30 +117,8 @@
             "selected": false,
             "icon": "noseThinning.png",
             "selectedIcon":"noseThinning_selected.png",
-            "key":"FB_FACE_NOSETHINNING_SLIDER",
-            "defaultValue":40,
-            "sliderType":1
-        },
-        {
-            "title": "鼻头",
-            "title_en": "Nose",
-            "idCard":32,
-            "selected": false,
-            "icon": "nose.png",
-            "selectedIcon":"nose_selected.png",
-            "key":"FB_FACE_NOSE_SLIDER",
-            "defaultValue":0,
-            "sliderType":1
-        },
-        {
-            "title": "山根",
-            "title_en": "Flocks",
-            "idCard":33,
-            "selected": false,
-            "icon": "noseRoot.png",
-            "selectedIcon":"noseRoot_selected.png",
-            "key":"FB_FACE_NOSEROOT_SLIDER",
-            "defaultValue":0,
+            "key":"HT_FACE_NOSETHINNING_SLIDER",
+            "defaultValue":50,
             "sliderType":1
         },
         {
@@ -238,7 +128,62 @@
             "selected": false,
             "icon": "mouthTrimming.png",
             "selectedIcon":"mouthTrimming_selected.png",
-            "key":"FB_FACE_MOUTHTRIMMING_SLIDER",
+            "key":"HT_FACE_MOUTHTRIMMING_SLIDER",
+            "defaultValue":0,
+            "sliderType":2
+        },
+        {
+            "title": "开眼角",
+            "title_en": "Canthus",
+            "idCard":14,
+            "selected": false,
+            "icon": "eyeCornerEnlarging.png",
+            "selectedIcon":"eyeCornerEnlarging_selected.png",
+            "key":"HT_FACE_EYECORNERENLARGING_SLIDER",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "眼间距",
+            "title_en": "Eye spacing",
+            "idCard":12,
+            "selected": false,
+            "icon": "eyeSpacingTrimming.png",
+            "selectedIcon":"eyeSpacingTrimming_selected.png",
+            "key":"HT_FACE_EYESPACINGTRIMMING_SLIDER",
+            "defaultValue":0,
+            "sliderType":2
+        },
+        {
+            "title": "眼睛角度",
+            "title_en": "Eye corner",
+            "idCard":13,
+            "selected": false,
+            "icon": "eyeAngle.png",
+            "selectedIcon":"eyeAngle_selected.png",
+            "key":"HT_FACE_EYEANGLE_SLIDER",
+            "defaultValue":0,
+            "sliderType":2
+        },
+        {
+            "title": "长鼻",
+            "title_en": "Long nose",
+            "idCard":30,
+            "selected": false,
+            "icon": "noseEnlarging.png",
+            "selectedIcon":"noseEnlarging_selected.png",
+            "key":"HT_FACE_NOSEENLARGING_SLIDER",
+            "defaultValue":0,
+            "sliderType":2
+        },
+        {
+            "title": "缩人中",
+            "title_en": "Shrink in",
+            "idCard":2,
+            "selected": false,
+            "icon": "philtrumTrimming.png",
+            "selectedIcon":"philtrumTrimming_selected.png",
+            "key":"HT_FACE_PHILTRUHTRIMMING_SLIDER",
             "defaultValue":0,
             "sliderType":2
         },
@@ -249,7 +194,62 @@
             "selected": false,
             "icon": "mouthSmilingEnlarging.png",
             "selectedIcon":"mouthSmilingEnlarging_selected.png",
-            "key":"FB_FACE_MOUTHSMILINGENLARGING_SLIDER",
+            "key":"HT_FACE_MOUTHSMILINGENLARGING_SLIDER",
+            "defaultValue":35,
+            "sliderType":1
+        },
+        {
+            "title": "丰太阳穴",
+            "title_en": "Temple",
+            "idCard":25,
+            "selected": false,
+            "icon": "temple.png",
+            "selectedIcon":"temple_selected.png",
+            "key":"HT_FACE_TEMPLE_SLIDER",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "小头",
+            "title_en": "Small head",
+            "idCard":26,
+            "selected": false,
+            "icon": "headSmaller.png",
+            "selectedIcon":"headSmaller_selected.png",
+            "key":"HT_FACE_HEADSMALLER_SLIDER",
+            "defaultValue":50,
+            "sliderType":1
+        },
+        {
+            "title": "发际线",
+            "title_en": "Hairline",
+            "idCard":1,
+            "selected": false,
+            "icon": "forehead.png",
+            "selectedIcon":"forehead_selected.png",
+            "key":"HT_FACE_FOREHEAD_SLIDER",
+            "defaultValue":0,
+            "sliderType":2
+        },
+        {
+            "title": "鼻头",
+            "title_en": "Nose",
+            "idCard":32,
+            "selected": false,
+            "icon": "nose.png",
+            "selectedIcon":"nose_selected.png",
+            "key":"HT_FACE_NOSE_SLIDER",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "山根",
+            "title_en": "Flocks",
+            "idCard":33,
+            "selected": false,
+            "icon": "noseRoot.png",
+            "selectedIcon":"noseRoot_selected.png",
+            "key":"HT_FACE_NOSEROOT_SLIDER",
             "defaultValue":0,
             "sliderType":1
         }

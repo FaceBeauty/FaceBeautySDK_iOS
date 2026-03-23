@@ -24,8 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithFrame:(CGRect)frame listArr:(NSArray *)listArr;
 
 @property (nonatomic, assign) BOOL isThemeWhite;
-@property (nonatomic,assign) bool effectHide;
 
+@property (nonatomic,assign) bool effectHide;
 
 @end
 

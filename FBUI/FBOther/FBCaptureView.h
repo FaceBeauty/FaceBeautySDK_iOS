@@ -9,9 +9,7 @@
 #import "FBVideoProgressView.h"
 NS_ASSUME_NONNULL_BEGIN
 /**
- 
     拍照点击视图
- 
  */
 @interface FBCaptureView : UIView
 

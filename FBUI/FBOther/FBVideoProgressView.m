@@ -2,6 +2,8 @@
 //  FBVideoProgressView.m
 //  FaceBeautyDemo
 //
+//  Created by Texeljoy Tech on 2023/3/30.
+//
 
 #import "FBVideoProgressView.h"
 #import "FBUIConfig.h"

@@ -52,34 +52,6 @@
 @end
 
 /**
- * 人手检测结果报告
- */
-@interface FBHandDetectionReport : NSObject
-
-/// 人手识别概率值
-@property (nonatomic, assign) CGFloat score;
-
-/// 人手区域矩形框
-@property (nonatomic, assign) CGRect rect;
-
-/// 人手区域中心点坐标
-@property (nonatomic, assign) CGPoint centerPoint;
-
-/// 人手（偏离正向）角度
-@property (nonatomic, assign) CGFloat rotation;
-
-/// 人手区域顶点坐标
-@property (nonatomic, assign) CGPoint *position;
-
-/// 人手骨骼关键点坐标
-@property (nonatomic, assign) CGPoint *keyPoints;
-
-/// 手势类型 @see FBGestureEnum
-@property (nonatomic, assign) int gesture;
-
-@end
-
-/**
  * 人体检测结果报告
  */
 @interface FBPoseDetectionReport : NSObject
@@ -106,10 +78,15 @@ typedef NS_ENUM(NSInteger, FBBeautyTypes) {
     FBBeautySkinWhitening       = 0, //!< 美白，0~100，0为无效果
     FBBeautyClearSmoothing      = 1, //!< 精细磨皮，0~100，0为无效果
     FBBeautySkinRosiness        = 2, //!< 红润，0~100，0为无效果
-    FBBeautyImageSharpness      = 3, //!< 清晰，0~100，0为无效果
+    FBBeautyImageSharpness      = 3, //!< 锐化（原清晰），0~100，0为无效果
     FBBeautyImageBrightness     = 4, //!< 亮度，-50~50，0为无效果
     FBBeautyDarkCircleLessening = 5, //!< 去黑眼圈，0~100，0为无效果
-    FBBeautyNasolabialLessening = 6  //!< 去法令纹，0~100，0为无效果
+    FBBeautyNasolabialLessening = 6, //!< 去法令纹，0~100，0为无效果
+    FBBeautyToothWhitening      = 7, //!< 美牙，0～100，0为无效果
+    FBBeautyEyeBrightening      = 8, //!< 亮眼，0～100，0为无效果
+    FBBeautyWhiteBalance        = 9,  //!< 白平衡，-50-50，0为无效果
+    FBBeautyImageClarity        = 10, //!< 清晰，0-100， 0为无效果
+    FBBeautyFaceContouring      = 11 //!< 五官立体，0-100， 0为无效果
 };
 
 /**
@@ -268,13 +245,12 @@ typedef NS_ENUM(NSInteger, FBGestureEnum) {
 /**
  * AI驱动类型枚举
  */
-typedef NS_ENUM(NSInteger, FBAITypes) {
-    FBAIFace106         = 0, //!< 人脸106关键点检测
-    FBAIFace278         = 1, //!< 人脸278关键点检测
-    FBAIHairParser      = 2, //!< 头发分割
-    FBAIPortraitMatting = 3, //!< 人像分割
-    FBAIHand            = 4, //!< 人手检测
-    FBAIPose            = 5  //!< 人体检测
+typedef NS_ENUM(NSInteger, NeonAITypes) {
+    AINeonFace            = 0, //!< 人脸检测
+    AINeonHair            = 1, //!< 头发分割
+    AINeonMatting         = 2, //!< 人像分割
+    AINeonHand            = 3, //!< 人手检测
+    AINeonPose            = 4  //!< 人体检测
 };
 
 #pragma mark - 单例
@@ -293,6 +269,18 @@ typedef NS_ENUM(NSInteger, FBAITypes) {
  *             "sg"，海外节点-新加坡
  */
 - (void)setAuthNetworkNode:(NSString *)node;
+
+#pragma mark - 资源文件拷贝
+
+/**
+ * 拷贝资源文件到指定沙盒路径
+ *
+ * @param bundlePath 本地资源文件路径
+ * @param sandboxPath 目标沙盒路径
+ *
+ * @return 拷贝是否成功
+ */
+- (BOOL)copyResourceBundle:(NSString *)bundlePath toSandbox:(NSString *)sandboxPath;
 
 #pragma mark - 初始化
 
@@ -330,6 +318,12 @@ typedef NS_ENUM(NSInteger, FBAITypes) {
  */
 - (int)authOffline:(NSString *)license;
 
+/**
+ * 鉴权初始化结果，用于uniapp端
+ *
+ * @return 获取鉴权结果
+ */
+- (int)getAuthResult;
 
 #pragma mark - 渲染处理
 
@@ -731,12 +725,7 @@ typedef NS_ENUM(NSInteger, FBAITypes) {
 /**
  * 获取人脸检测结果报告
  */
-- (NSArray<FBFaceDetectionReport *> *)getFaceDetectionReport;
-
-/**
- * 获取人手检测结果报告
- */
-- (NSArray<FBHandDetectionReport *> *)getHandDetectionReport;
+//- (NSArray<FBFaceDetectionReport *> *)getFaceDetectionReport;
 
 /**
  * 判断是否检测到全身人体
@@ -748,7 +737,7 @@ typedef NS_ENUM(NSInteger, FBAITypes) {
 /**
  * 获取人体检测结果报告
  */
-- (NSArray<FBPoseDetectionReport *> *)getPoseDetectionReport;
+//- (NSArray<FBPoseDetectionReport *> *)getPoseDetectionReport;
 
 #pragma mark - 其它
 /**
@@ -759,7 +748,7 @@ typedef NS_ENUM(NSInteger, FBAITypes) {
  *
  * @return 功能模块的参数值，统一返回NSString类型，需根据具体参数类型转换，如NSString->int, NSString->float...
  */
-- (NSString *)getParamFrom:(NSString *)method property:(NSString *)key;
+//- (NSString *)getParamFrom:(NSString *)method property:(NSString *)key;
 
 /**
  * 部分透明图渲染支持开关
@@ -828,12 +817,5 @@ typedef NS_ENUM(NSInteger, FBAITypes) {
  * @return 素材网络路径
  */
 - (NSString *)getResourceUrl;
-
-/**
- * 设置资源拷贝至沙盒的自定义目标路径
- *
- * @param path 路径
- */
-- (void)setResourcePath:(NSString *)path;
 
 @end

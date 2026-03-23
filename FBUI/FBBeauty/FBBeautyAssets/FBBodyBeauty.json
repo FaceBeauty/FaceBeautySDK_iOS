@@ -1,0 +1,100 @@
+{
+    "FBBodyBeauty": [
+        {
+            "title": "长腿",
+            "title_en": "Leg",
+            "name": "leg_slimming",
+            "idCard":0,
+            "selected": true,
+            "icon": "icon_longleg_white_normal.webp",
+            "selectedIcon":"icon_longleg_white_selected.webp",
+            "key":"HT_BODY_LEGSLIMMING",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "瘦身",
+            "title_en": "Slim",
+            "name": "body_thinning",
+            "idCard":1,
+            "selected": false,
+            "icon": "icon_thin_white_normal.webp",
+            "selectedIcon":"icon_thin_white_selected.webp",
+            "key":"HT_BODY_BODYTHINNING",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "细腰",
+            "title_en": "Waist",
+            "name": "waist_slimming",
+            "idCard":2,
+            "selected": false,
+            "icon": "icon_waistslim_white_normal.webp",
+            "selectedIcon":"icon_waistslim_white_selected.webp",
+            "key":"HT_BODY_WAISTSLIMMING",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "美肩",
+            "title_en": "Shoulder",
+            "name": "shoulder_slimming",
+            "idCard":3,
+            "selected": false,
+            "icon": "icon_shoulderslim_white_normal.webp",
+            "selectedIcon":"icon_shoulderslim_white_selected.webp",
+            "key":"HT_BODY_SHOULDERSLIMMING",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "修胯",
+            "title_en": "Hip",
+            "name": "hip_trimming",
+            "idCard":4,
+            "selected": false,
+            "icon": "icon_hiptrim_white_normal.webp",
+            "selectedIcon":"icon_hiptrim_white_selected.webp",
+            "key":"HT_BODY_HIPTRIMMING",
+            "defaultValue":0,
+            "sliderType":2
+        },
+        {
+            "title": "瘦大腿",
+            "title_en": "Thigh",
+            "name": "thigh_thinning",
+            "idCard":5,
+            "selected": false,
+            "icon": "icon_thighthin_white_normal.webp",
+            "selectedIcon":"icon_thighthin_white_selected.webp",
+            "key":"HT_BODY_THIGHTHINNING",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "天鹅颈",
+            "title_en": "Neck",
+            "name": "neck_slimming",
+            "idCard":6,
+            "selected": false,
+            "icon": "icon_neckslim_white_normal.webp",
+            "selectedIcon":"icon_neckslim_white_selected.webp",
+            "key":"HT_BODY_NECKSLIMMING",
+            "defaultValue":0,
+            "sliderType":1
+        },
+        {
+            "title": "丰胸",
+            "title_en": "Chest",
+            "name": "chest_enlarging",
+            "idCard":7,
+            "selected": false,
+            "icon": "icon_chestenlarge_white_normal.webp",
+            "selectedIcon":"icon_chestenlarge_white_selected.webp",
+            "key":"HT_BODY_CHESTENLARGING",
+            "defaultValue":0,
+            "sliderType":1
+        }
+    ]
+}

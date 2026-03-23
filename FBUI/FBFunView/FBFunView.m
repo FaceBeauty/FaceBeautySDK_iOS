@@ -37,10 +37,8 @@
         [self addSubview:self.containerView];
         [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(self);
-            make.height.mas_equalTo(FBHeight(258));
+            make.height.mas_equalTo(kContainerHeightFun+kSafeAreaBottom);
         }];
-        
-        
     }
     
     return self;
@@ -52,15 +50,15 @@
     _listArr = @[
         @{
 //            @"name":[FBTool isCurrentLanguageChinese] ? @"风格滤镜" : @"Style",
-//            @"classify":[FBTool jsonModeForPath:[[[FaceBeauty shareInstance] getFilterPath] stringByAppendingFormat:@"fb_style_filter_config.json"] withKey:@"fb_style_filter"]
+//            @"classify":[FBTool jsonModeForPath:[[[FaceBeauty shareInstance] getFilterPath] stringByAppendingFormat:@"style_filter_config.json"] withKey:@"style_filter"]
         }
 //        @{
 //            @"name":[FBTool isCurrentLanguageChinese] ? @"特效滤镜" : @"Special",
-//            @"classify":[FBTool jsonModeForPath:[[[FaceBeauty shareInstance] getFilterPath] stringByAppendingFormat:@"ht_effect_filter_config.json"] withKey:@"ht_effect_filter"]
+//            @"classify":[FBTool jsonModeForPath:[[[FaceBeauty shareInstance] getFilterPath] stringByAppendingFormat:@"fb_effect_filter_config.json"] withKey:@"fb_effect_filter"]
 //        },
 //        @{
 //            @"name":[FBTool isCurrentLanguageChinese] ? @"哈哈镜" : @"Distorting",
-//            @"classify":[FBTool jsonModeForPath:[[[FaceBeauty shareInstance] getFilterPath] stringByAppendingFormat:@"ht_haha_filter_config.json"] withKey:@"ht_haha_filter"]
+//            @"classify":[FBTool jsonModeForPath:[[[FaceBeauty shareInstance] getFilterPath] stringByAppendingFormat:@"fb_haha_filter_config.json"] withKey:@"fb_haha_filter"]
 //        }
       ];
     return _listArr;

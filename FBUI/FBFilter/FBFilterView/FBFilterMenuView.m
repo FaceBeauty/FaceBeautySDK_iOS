@@ -16,7 +16,7 @@
 
 @end
 
-static NSString *const HTFilterMenuViewCellId = @"HTFilterMenuViewCellId";
+static NSString *const FBFilterMenuViewCellId = @"FBFilterMenuViewCellId";
 
 @implementation FBFilterMenuView
 
@@ -31,7 +31,7 @@ static NSString *const HTFilterMenuViewCellId = @"HTFilterMenuViewCellId";
         _menuCollectionView.dataSource= self;
         _menuCollectionView.delegate = self;
         _menuCollectionView.alwaysBounceHorizontal = YES;
-        [_menuCollectionView registerClass:[FBSubMenuViewCell class] forCellWithReuseIdentifier:HTFilterMenuViewCellId];
+        [_menuCollectionView registerClass:[FBSubMenuViewCell class] forCellWithReuseIdentifier:FBFilterMenuViewCellId];
     }
     return _menuCollectionView;
 }
@@ -62,13 +62,13 @@ static NSString *const HTFilterMenuViewCellId = @"HTFilterMenuViewCellId";
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(FBScreenWidth/5 ,FBHeight(45));
+    return CGSizeMake(FBScreenWidth/5, kMenuViewHeight);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     NSDictionary *dic = self.listArr[indexPath.row];
-    FBSubMenuViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HTFilterMenuViewCellId forIndexPath:indexPath];
+    FBSubMenuViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:FBFilterMenuViewCellId forIndexPath:indexPath];
     if (self.selectedIndexPath.row == indexPath.row) {
         [cell setTitle:dic[@"name"] selected:YES textColor:MAIN_COLOR];
     }else{

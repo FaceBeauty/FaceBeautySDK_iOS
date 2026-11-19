@@ -804,6 +804,13 @@ typedef NS_ENUM(NSInteger, NeonAITypes) {
 - (void)setPerformancePriorityEnable:(BOOL)enable;
 
 /**
+ * 设置磨皮模式
+ * 0 - 通用模式，仅人脸磨皮，默认值；
+ * 1 - 全身磨皮，当前仅支持人脸和脖颈区域；后续会完善成全身区域
+ */
+- (void)setSkinClearSmoothingMode:(int)mode;
+
+/**
  * 设置素材网络路径
  * 将素材保存在自定义的网络存储中的情况下，设置网络路径
  *
